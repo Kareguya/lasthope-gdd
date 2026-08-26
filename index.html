@@ -17,9 +17,15 @@
     messagingSenderId: "359128216310",
     appId: "1:359128216310:web:baf353e485b4ed4173b2d7"
   };
-  firebase.initializeApp(firebaseConfig);
-  window.db = firebase.firestore();
-  document.dispatchEvent(new Event('firebase-ready'));
+  try {
+    firebase.initializeApp(firebaseConfig);
+    window.db = firebase.firestore();
+    window.firebaseReady = true;
+    console.log('✅ Firebase erfolgreich initialisiert');
+  } catch(err) {
+    console.error('❌ Firebase Init Fehler:', err);
+    window.firebaseInitError = err.message;
+  }
 </script>
 
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Space+Mono&display=swap" rel="stylesheet">
@@ -394,23 +400,29 @@ function updateForms() {
   });
 }
 
-let firebaseReady = false;
-document.addEventListener('firebase-ready', () => {
-  firebaseReady = true;
-  console.log('Firebase bereit!');
-  loadAllCounts();
-  updateForms();
+// Firebase: polling statt Event (vermeidet Timing-Probleme)
+window.addEventListener('DOMContentLoaded', () => {
+  if (window.db) {
+    loadAllCounts();
+    updateForms();
+  } else {
+    let tries = 0;
+    const interval = setInterval(() => {
+      tries++;
+      if (window.db) {
+        clearInterval(interval);
+        loadAllCounts();
+        updateForms();
+      } else if (tries > 20) {
+        clearInterval(interval);
+        console.error('Firebase konnte nicht geladen werden.');
+      }
+    }, 300);
+  }
 });
 
-// Fallback: nach 5 Sekunden nochmal prüfen
-setTimeout(() => {
-  if (!firebaseReady) {
-    console.warn('Firebase noch nicht bereit nach 5s');
-  }
-}, 5000);
-
 async function loadAllCounts() {
-  if (!firebaseReady) return;
+  if (!window.db) return;
   
   let total = 0;
   for (const sec of sections) {
@@ -424,7 +436,7 @@ async function loadAllCounts() {
 }
 
 async function loadComments(sectionId) {
-  if (!firebaseReady) return;
+  if (!window.db) return;
   
   const listEl = document.getElementById('comments-' + sectionId);
   listEl.innerHTML = '<div class="no-comments" style="color:var(--muted)">Lädt...</div>';
@@ -445,7 +457,14 @@ async function loadComments(sectionId) {
 
 async function submitComment(sectionId) {
   if (!currentUser) { openModal(); return; }
-  if (!firebaseReady) { alert('Firebase lädt noch — bitte kurz warten und nochmal versuchen.'); return; }
+  if (!window.db) {
+    const msg = window.firebaseInitError
+      ? 'Firebase Fehler: ' + window.firebaseInitError
+      : 'Firebase lädt noch — bitte kurz warten und nochmal versuchen.';
+    alert(msg);
+    console.error('window.db ist leer. Fehler:', window.firebaseInitError);
+    return;
+  }
   const input = document.getElementById('input-' + sectionId);
   const btn = document.getElementById('btn-' + sectionId);
   const text = input.value.trim();
