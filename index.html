@@ -15,7 +15,7 @@
     databaseURL: "https://lasthope-gdd-default-rtdb.europe-west1.firebasedatabase.app",,
     storageBucket: "lasthope-gdd.firebasestorage.app",
     messagingSenderId: "359128216310",
-    appId: "1:359128216310:web:725e22985c3805ad73b2d7"
+    appId: "1:359128216310:web:baf353e485b4ed4173b2d7"
   };
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
@@ -397,7 +397,19 @@ function updateForms() {
 }
 
 let firebaseReady = false;
-document.addEventListener('firebase-ready', () => { firebaseReady = true; loadAllCounts(); updateForms(); });
+document.addEventListener('firebase-ready', () => {
+  firebaseReady = true;
+  console.log('Firebase bereit!');
+  loadAllCounts();
+  updateForms();
+});
+
+// Fallback: nach 5 Sekunden nochmal prüfen
+setTimeout(() => {
+  if (!firebaseReady) {
+    console.warn('Firebase noch nicht bereit nach 5s');
+  }
+}, 5000);
 
 async function loadAllCounts() {
   if (!firebaseReady) return;
@@ -435,7 +447,8 @@ async function loadComments(sectionId) {
 }
 
 async function submitComment(sectionId) {
-  if (!firebaseReady || !currentUser) return;
+  if (!currentUser) { openModal(); return; }
+  if (!firebaseReady) { alert('Firebase lädt noch — bitte kurz warten und nochmal versuchen.'); return; }
   const input = document.getElementById('input-' + sectionId);
   const btn = document.getElementById('btn-' + sectionId);
   const text = input.value.trim();
@@ -443,10 +456,13 @@ async function submitComment(sectionId) {
   btn.disabled = true; btn.textContent = '...';
   try {
     const { collection, addDoc, serverTimestamp } = window.fbModules;
-    await addDoc(collection(window.db, 'comments_' + sectionId), { author: currentUser, text, createdAt: serverTimestamp() });
+    await addDoc(collection(window.db, 'comments_' + sectionId), { author: currentUser, text: text, createdAt: serverTimestamp() });
     input.value = '';
     await loadComments(sectionId);
-  } catch(e) { alert('Fehler. Ist Firebase konfiguriert?'); }
+  } catch(e) {
+    console.error('Firebase Fehler:', e);
+    alert('Fehler beim Speichern: ' + e.message);
+  }
   btn.disabled = false; btn.textContent = 'Senden';
 }
 
