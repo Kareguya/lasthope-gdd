@@ -5,22 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Last Hope — Community GDD</title>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script>
   const firebaseConfig = {
     apiKey: "AIzaSyCqV1YHbSsVlsfnalZxi8QUqNFnSfvWsSc",
     authDomain: "lasthope-gdd.firebaseapp.com",
-    projectId: "lasthope-gdd"
-    databaseURL: "https://lasthope-gdd-default-rtdb.europe-west1.firebasedatabase.app",,
+    databaseURL: "https://lasthope-gdd-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "lasthope-gdd",
     storageBucket: "lasthope-gdd.firebasestorage.app",
     messagingSenderId: "359128216310",
     appId: "1:359128216310:web:baf353e485b4ed4173b2d7"
   };
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  window.db = db;
-  window.fbModules = { collection, addDoc, getDocs, query, orderBy, serverTimestamp };
+  firebase.initializeApp(firebaseConfig);
+  window.db = firebase.firestore();
   document.dispatchEvent(new Event('firebase-ready'));
 </script>
 
@@ -413,11 +411,11 @@ setTimeout(() => {
 
 async function loadAllCounts() {
   if (!firebaseReady) return;
-  const { collection, getDocs } = window.fbModules;
+  
   let total = 0;
   for (const sec of sections) {
     try {
-      const snap = await getDocs(collection(window.db, 'comments_' + sec.id));
+      const snap = await window.db.collection('comments_' + sec.id).get();
       total += snap.size;
       updateCount(sec.id, snap.size);
     } catch(e) {}
@@ -427,12 +425,11 @@ async function loadAllCounts() {
 
 async function loadComments(sectionId) {
   if (!firebaseReady) return;
-  const { collection, getDocs, query, orderBy } = window.fbModules;
+  
   const listEl = document.getElementById('comments-' + sectionId);
   listEl.innerHTML = '<div class="no-comments" style="color:var(--muted)">Lädt...</div>';
   try {
-    const q = query(collection(window.db, 'comments_' + sectionId), orderBy('createdAt', 'asc'));
-    const snap = await getDocs(q);
+    const snap = await window.db.collection('comments_' + sectionId).orderBy('createdAt', 'asc').get();
     if (snap.empty) { listEl.innerHTML = '<div class="no-comments">Noch keine Kommentare. Sei der Erste!</div>'; return; }
     listEl.innerHTML = '';
     snap.forEach(doc => {
@@ -455,8 +452,8 @@ async function submitComment(sectionId) {
   if (!text) return;
   btn.disabled = true; btn.textContent = '...';
   try {
-    const { collection, addDoc, serverTimestamp } = window.fbModules;
-    await addDoc(collection(window.db, 'comments_' + sectionId), { author: currentUser, text: text, createdAt: serverTimestamp() });
+    
+    await window.db.collection('comments_' + sectionId).add({ author: currentUser, text: text, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
     input.value = '';
     await loadComments(sectionId);
   } catch(e) {
