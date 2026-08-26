@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Last Hope — Community GDD</title>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  const firebaseConfig = {
+    apiKey: "AIzaSyCqV1YHbSsVlsfnalZxi8QUqNFnSfvWsSc",
+    authDomain: "lasthope-gdd.firebaseapp.com",
+    projectId: "lasthope-gdd"
+    databaseURL: "https://lasthope-gdd-default-rtdb.europe-west1.firebasedatabase.app",,
+    storageBucket: "lasthope-gdd.firebasestorage.app",
+    messagingSenderId: "359128216310",
+    appId: "1:359128216310:web:725e22985c3805ad73b2d7"
+  };
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  window.db = db;
+  window.fbModules = { collection, addDoc, getDocs, query, orderBy, serverTimestamp };
+  document.dispatchEvent(new Event('firebase-ready'));
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Space+Mono&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #080808; --dark: #0f0f0f; --card: #141414; --border: #222;
+  --text: #ede9e0; --muted: #4a4a4a; --dim: #7a7a7a;
+  --accent: #c8441a; --accent2: #e85d1a;
+  --green: #3db356;
+  --fd: 'Bebas Neue', sans-serif;
+  --fb: 'Inter', sans-serif;
+  --fm: 'Space Mono', monospace;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--text); font-family: var(--fb); font-size: 15px; line-height: 1.6; overflow-x: hidden; }
+
+/* MODAL */
+.modal-overlay { position: fixed; inset: 0; z-index: 999; background: rgba(0,0,0,0.9); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal { background: var(--dark); border: 1px solid var(--border); border-radius: 8px; padding: 2rem; width: 360px; max-width: 90vw; }
+.modal-title { font-family: var(--fd); font-size: 32px; color: var(--text); letter-spacing: 0.04em; margin-bottom: 4px; }
+.modal-sub { font-size: 13px; color: var(--dim); margin-bottom: 1.5rem; }
+.modal-input { width: 100%; background: #1a1a1a; border: 1px solid var(--border); color: var(--text); font-size: 14px; padding: 10px 14px; border-radius: 4px; margin-bottom: 10px; outline: none; transition: border-color 0.2s; }
+.modal-input:focus { border-color: var(--accent); }
+.modal-btn { width: 100%; background: var(--accent); color: white; border: none; font-family: var(--fm); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 12px; border-radius: 4px; cursor: pointer; }
+.modal-close { float: right; background: none; border: none; color: var(--dim); cursor: pointer; font-size: 20px; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: rgba(8,8,8,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; height: 56px; }
+.nav-logo { font-family: var(--fd); font-size: 22px; letter-spacing: 0.1em; color: var(--accent); }
+.nav-right { display: flex; align-items: center; gap: 1rem; }
+.nav-user { font-family: var(--fm); font-size: 11px; color: var(--dim); }
+.btn-nav { font-family: var(--fm); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; background: none; color: var(--accent); border: 1px solid var(--accent); padding: 6px 16px; border-radius: 2px; cursor: pointer; transition: all 0.2s; }
+.btn-nav:hover { background: var(--accent); color: white; }
+
+/* HERO */
+.hero {
+  min-height: 100vh; position: relative; display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 6rem 3rem 4rem; overflow: hidden;
+}
+.hero-img {
+  position: absolute; inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1682687982501-1e58ab814714?w=1600&q=80');
+  background-size: cover; background-position: center;
+  filter: brightness(0.25) saturate(0.6);
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(8,8,8,1) 0%, rgba(8,8,8,0.6) 40%, rgba(8,8,8,0.2) 100%);
+}
+.hero-overlay2 {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 80% 30%, rgba(200,68,26,0.08) 0%, transparent 60%);
+}
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; font-family: var(--fm); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(200,68,26,0.35); padding: 5px 14px; border-radius: 2px; width: fit-content; margin-bottom: 1.5rem; position: relative; }
+.hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
+.hero-title { font-family: var(--fd); font-size: clamp(80px, 14vw, 160px); line-height: 0.88; letter-spacing: 0.02em; position: relative; }
+.hero-title .ghost { display: block; -webkit-text-stroke: 1.5px var(--accent); color: transparent; }
+.hero-desc { font-size: 16px; color: var(--dim); max-width: 520px; margin-top: 1.5rem; line-height: 1.8; position: relative; }
+.hero-stats { display: flex; gap: 3rem; margin-top: 2.5rem; position: relative; }
+.hstat-num { font-family: var(--fd); font-size: 40px; color: var(--accent); letter-spacing: 0.04em; }
+.hstat-label { font-family: var(--fm); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.hero-scroll { position: absolute; bottom: 2.5rem; right: 3rem; font-family: var(--fm); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); writing-mode: vertical-rl; display: flex; align-items: center; gap: 10px; }
+.hero-scroll::after { content: ''; width: 1px; height: 50px; background: linear-gradient(to bottom, var(--muted), transparent); }
+
+/* INTRO BANNER */
+.intro-banner { position: relative; overflow: hidden; }
+.intro-img { width: 100%; height: 320px; object-fit: cover; filter: brightness(0.2) saturate(0.5); display: block; }
+.intro-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(8,8,8,0.95) 0%, rgba(8,8,8,0.6) 50%, transparent 100%); display: flex; align-items: center; padding: 3rem; }
+.intro-text { max-width: 500px; }
+.intro-eyebrow { font-family: var(--fm); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+.intro-title { font-family: var(--fd); font-size: 40px; letter-spacing: 0.04em; color: var(--text); margin-bottom: 0.75rem; }
+.intro-body { font-size: 14px; color: var(--dim); line-height: 1.8; }
+.intro-body strong { color: var(--text); font-weight: 500; }
+
+/* SECTION GRID */
+.sec-grid { padding: 3rem 2.5rem; max-width: 1200px; margin: 0 auto; }
+.sec-grid-title { font-family: var(--fm); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+
+/* IMAGE BANNERS between sections */
+.img-banner { position: relative; height: 200px; overflow: hidden; margin: 0; }
+.img-banner img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.2) saturate(0.5); display: block; }
+.img-banner-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(8,8,8,0.9), transparent, rgba(8,8,8,0.9)); display: flex; align-items: center; justify-content: center; }
+.img-banner-label { font-family: var(--fd); font-size: 36px; letter-spacing: 0.1em; color: rgba(255,255,255,0.15); text-transform: uppercase; }
+
+/* GDD SECTION CARDS */
+.gdd-card { background: var(--dark); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 10px; transition: border-color 0.2s; }
+.gdd-card:hover { border-color: #333; }
+.gdd-card-header { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 1.5rem; cursor: pointer; user-select: none; transition: background 0.2s; }
+.gdd-card-header:hover { background: rgba(255,255,255,0.02); }
+.card-left { display: flex; align-items: center; gap: 14px; }
+.card-num { font-family: var(--fm); font-size: 10px; color: var(--muted); width: 20px; }
+.card-icon-wrap { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 15px; background: var(--card); border: 1px solid var(--border); flex-shrink: 0; }
+.card-title { font-size: 15px; font-weight: 500; color: var(--text); }
+.card-right { display: flex; align-items: center; gap: 10px; }
+.ccount { font-family: var(--fm); font-size: 10px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); }
+.ccount.has { border-color: rgba(200,68,26,0.4); color: var(--accent); }
+.chevron { color: var(--muted); font-size: 11px; transition: transform 0.25s; }
+.gdd-card.open .chevron { transform: rotate(180deg); }
+.gdd-card-body { display: none; border-top: 1px solid var(--border); }
+.gdd-card.open .gdd-card-body { display: block; }
+
+/* CARD WITH IMAGE HEADER */
+.card-img-header { position: relative; height: 160px; overflow: hidden; }
+.card-img-header img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.2) saturate(0.5); display: block; }
+.card-img-header-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(14,14,14,1) 0%, rgba(14,14,14,0.4) 100%); }
+
+/* CONTENT */
+.sec-content { padding: 1.5rem; background: var(--black); }
+.sec-content p { font-size: 14px; color: var(--dim); line-height: 1.75; margin-bottom: 8px; }
+.sub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 8px; margin-top: 10px; }
+.sub-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 12px 14px; }
+.sub-card-title { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+.sub-card-body { font-size: 12px; color: var(--dim); line-height: 1.55; }
+.pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.pill { font-size: 11px; color: var(--dim); border: 1px solid var(--border); padding: 3px 10px; border-radius: 999px; }
+.pill.special { border-color: rgba(200,68,26,0.4); color: var(--accent); }
+.diff-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-top: 10px; }
+.diff-box { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 12px 14px; }
+.diff-box-title { font-size: 13px; font-weight: 700; margin-bottom: 3px; }
+.diff-box-title.easy { color: var(--green); }
+.diff-box-title.medium { color: #e8a21a; }
+.diff-box-title.hard { color: var(--accent); }
+.diff-box-sub { font-size: 10px; font-family: var(--fm); color: var(--muted); margin-bottom: 8px; }
+.diff-box ul { list-style: none; }
+.diff-box ul li { font-size: 12px; color: var(--dim); padding: 3px 0; border-bottom: 1px solid var(--border); }
+.diff-box ul li::before { content: '— '; color: var(--muted); }
+.city-tbl { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 10px; }
+.city-tbl th { text-align: left; font-size: 10px; font-family: var(--fm); color: var(--muted); padding: 6px 8px; border-bottom: 1px solid var(--border); letter-spacing: 0.08em; text-transform: uppercase; }
+.city-tbl td { padding: 6px 8px; border-bottom: 1px solid var(--border); color: var(--dim); }
+.city-tbl td:first-child { text-decoration: line-through; color: var(--muted); }
+.city-tbl td:last-child { color: var(--text); font-weight: 500; }
+.note { font-size: 12px; color: var(--muted); margin-top: 8px; font-style: italic; }
+
+/* COMMENTS */
+.comments-area { background: var(--dark); padding: 1.5rem; border-top: 1px solid var(--border); }
+.ctitle { font-family: var(--fm); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+.comment-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.25rem; }
+.comment-item { background: var(--black); border: 1px solid var(--border); border-radius: 4px; padding: 12px 14px; }
+.comment-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.comment-author { font-size: 12px; font-weight: 600; color: var(--accent); }
+.comment-time { font-family: var(--fm); font-size: 10px; color: var(--muted); }
+.comment-body { font-size: 13px; color: var(--dim); line-height: 1.6; }
+.no-comments { font-size: 13px; color: var(--muted); font-style: italic; margin-bottom: 1rem; }
+.comment-form { display: flex; gap: 10px; }
+.comment-input { flex: 1; background: var(--black); border: 1px solid var(--border); color: var(--text); font-family: var(--fb); font-size: 13px; padding: 10px 14px; border-radius: 4px; outline: none; transition: border-color 0.2s; resize: none; }
+.comment-input:focus { border-color: var(--accent); }
+.comment-submit { background: var(--accent); color: white; border: none; font-family: var(--fm); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; padding: 10px 18px; border-radius: 4px; cursor: pointer; white-space: nowrap; align-self: flex-end; transition: opacity 0.2s; }
+.comment-submit:hover { opacity: 0.85; }
+.comment-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+.login-prompt { font-size: 13px; color: var(--muted); font-style: italic; }
+.login-prompt span { color: var(--accent); cursor: pointer; text-decoration: underline; }
+
+footer { border-top: 1px solid var(--border); padding: 2.5rem; text-align: center; }
+footer p { font-family: var(--fm); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-title">Einloggen</div>
+    <div class="modal-sub">Gib deinen Namen ein um Kommentare zu hinterlassen.</div>
+    <input class="modal-input" id="nameInput" placeholder="Dein Name" maxlength="30">
+    <button class="modal-btn" onclick="doLogin()">Weiter →</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Last Hope</div>
+  <div class="nav-right">
+    <span class="nav-user" id="navUser"></span>
+    <button class="btn-nav" id="navBtn" onclick="openModal()">Einloggen</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-overlay2"></div>
+  <div class="hero-badge"><div class="hero-badge-dot"></div>Game Design Document · Community</div>
+  <h1 class="hero-title">
+    Last<br>
+    <span class="ghost">Hope</span>
+  </h1>
+  <p class="hero-desc">Das lebende GDD — kommentiere jeden Abschnitt, teile deine Ideen, baue das Spiel gemeinsam mit.</p>
+  <div class="hero-stats">
+    <div><div class="hstat-num">17</div><div class="hstat-label">Abschnitte</div></div>
+    <div><div class="hstat-num" id="totalComments">—</div><div class="hstat-label">Kommentare</div></div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</div>
+
+<!-- STORY BANNER -->
+<div class="intro-banner">
+  <img class="intro-img" src="https://images.unsplash.com/photo-1545703549-7bdb1d01b734?w=1400&q=80" alt="destroyed city">
+  <div class="intro-overlay">
+    <div class="intro-text">
+      <div class="intro-eyebrow">Die Welt</div>
+      <div class="intro-title">Die Invasion</div>
+      <div class="intro-body">
+        Aliens haben die Erde erobert. Die Hauptarmee ist abgezogen — zurück blieb eine Besatzungstruppe. <strong>Kira</strong>, Anführerin des Widerstands, weiß: Verstecken reicht nicht. <strong>Es ist Zeit zurückzuschlagen.</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTIONS -->
+<div class="sec-grid">
+  <div class="sec-grid-title">Game Design Document — alle Abschnitte</div>
+  <div id="sectionsContainer"></div>
+</div>
+
+<footer><p>Last Hope · Game Design Document · Version 0.2 · Work in Progress · Alle Rechte vorbehalten</p></footer>
+
+<script>
+let currentUser = localStorage.getItem('gdd_username') || null;
+updateNavUser();
+
+const sections = [
+  { id:'story', num:'01', icon:'📖', title:'Story', img:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=60',
+    content:`<p>Aliens haben die Erde erobert. Die Hauptarmee ist abgezogen, aber eine starke Besatzungsarmee schützt die Abbauanlagen. Die wenigen Überlebenden — angeführt von Widerstandskämpferin <strong style="color:var(--text)">Kira</strong> — bauen eine geheime Basis, erkunden die Ruinen, sammeln Ressourcen und forschen an erbeuteter Alien-Technologie.</p><p style="margin-top:8px">Ziel: die Aliens vertreiben und die Erde zurückgewinnen.</p>`},
+  { id:'kernziele', num:'02', icon:'🎯', title:'Kernziele', img:'https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=800&q=60',
+    content:`<div class="sub-grid"><div class="sub-card"><div class="sub-card-title">Aufbauen</div><div class="sub-card-body">Basis errichten, Verteidigungsanlagen, Fallen, Farm und Strom</div></div><div class="sub-card"><div class="sub-card-title">Erkunden</div><div class="sub-card-body">Überlebende finden, Alien-Einrichtungen auskundschaften, Ressourcen sammeln</div></div><div class="sub-card"><div class="sub-card-title">Verteidigen</div><div class="sub-card-body">Alien-Angriffe abwehren — skalieren mit Spielerlevel und Bewohnerzahl</div></div><div class="sub-card"><div class="sub-card-title">Überleben</div><div class="sub-card-body">Autark werden, Alien-Technologie erforschen, zurückschlagen</div></div></div>`},
+  { id:'welt', num:'03', icon:'🗺️', title:'Welt & Karte', img:'https://images.unsplash.com/photo-1465447142348-e9952c393450?w=800&q=60',
+    content:`<div class="sub-grid"><div class="sub-card"><div class="sub-card-title">Zonenmodell</div><div class="sub-card-body">Rundes Modell: sicherer Kern → nach außen immer gefährlicher und besseres Loot</div></div><div class="sub-card"><div class="sub-card-title">Reisen</div><div class="sub-card-body">Verpflegung nötig · Essen kann verderben · Schnellreise (hohes Risiko) oder Langsame Reise</div></div><div class="sub-card"><div class="sub-card-title">Gebiete</div><div class="sub-card-body">Werden vom Gegner zurückerobert bei Inaktivität · geschützt durch Berge/Meer/See</div></div></div>`},
+  { id:'charakter', num:'04', icon:'⚔️', title:'Charakter & Stats', img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=60',
+    content:`<div class="sub-grid"><div class="sub-card"><div class="sub-card-title">Stärke</div><div class="sub-card-body">Physische Stärke · Nahkampfschaden · Tragkraft · Einschüchterung</div></div><div class="sub-card"><div class="sub-card-title">Geschick</div><div class="sub-card-body">Beweglichkeit · Reflexe · Genauigkeit · Ausweichen</div></div><div class="sub-card"><div class="sub-card-title">Konstitution</div><div class="sub-card-body">Leben · Ausdauer · Resistenzen</div></div><div class="sub-card"><div class="sub-card-title">Intelligenz / Weisheit / Charisma</div><div class="sub-card-body">Wissen · Logik · Soziale Interaktion · Führungskraft</div></div></div><p class="note">Alle Attribute verbessern sich durch Benutzen — kein klassisches Levelup-System</p>`},
+  { id:'skills', num:'05', icon:'🧠', title:'Skills & Berufe', img:'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=60',
+    content:`<div class="sub-grid"><div class="sub-card"><div class="sub-card-title">Nahkampf</div><div class="sub-card-body">Verbesserte Attribute, Schaden, Haltbarkeit mit Nahkampfwaffen</div></div><div class="sub-card"><div class="sub-card-title">Fernkampf</div><div class="sub-card-body">Schaden, Genauigkeit, Nachladezeit, Haltbarkeit</div></div><div class="sub-card"><div class="sub-card-title">Handwerk</div><div class="sub-card-body">Höhere Haltbarkeit, schnellere Herstellung</div></div><div class="sub-card"><div class="sub-card-title">Kochen</div><div class="sub-card-body">Erhöht die Wirkung der Gerichte</div></div><div class="sub-card"><div class="sub-card-title">Schneidern</div><div class="sub-card-body">Höhere Haltbarkeit, bessere Rüstung</div></div><div class="sub-card"><div class="sub-card-title">Collector ⭐</div><div class="sub-card-body">Spaßberuf · schätzt Ratings von Sammelobjekten genauer ein</div></div><div class="sub-card"><div class="sub-card-title">Farming</div><div class="sub-card-body">Höhere Erträge</div></div></div>`},
+  { id:'gegner', num:'06', icon:'👾', title:'Gegner', img:'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=800&q=60',
+    content:`<div class="sub-grid"><div class="sub-card"><div class="sub-card-title">Alien Kommander</div><div class="sub-card-body">Patrouilliert mit Fernkampf-Soldat, Nahkampf-Soldat und Tierzähmer</div></div><div class="sub-card"><div class="sub-card-title">Fernkampf-Soldat</div><div class="sub-card-body">Leichte Rüstung · geht bei Kontakt in Deckung</div></div><div class="sub-card"><div class="sub-card-title">Nahkampf-Soldat</div><div class="sub-card-body">Schwere Rüstung · stürmt bei Kontakt nach vorne</div></div><div class="sub-card"><div class="sub-card-title">Tierzähmer</div><div class="sub-card-body">Summoner · schickt gezähmte Tiere vor · wechselt bei Notfall in Nahkampf</div></div><div class="sub-card"><div class="sub-card-title">Scout / Späher</div><div class="sub-card-body">Meldet Feindkontakt · entkommt er = garantierte Gegner im nächsten Gebiet</div></div><div class="sub-card"><div class="sub-card-title">Mutierte Wesen</div><div class="sub-card-body">Nur noch große starke Tiere · Giftpflanzen</div></div></div>`},
+  { id:'crafting', num:'07', icon:'🔧', title:'Crafting & Basenbau', img:'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=800&q=60',
+    content:`<div class="sub-grid"><div class="sub-card"><div class="sub-card-title">Waffenbau</div><div class="sub-card-body">Messer · Axt · Speer · Bogen · Armbrust · (Pistolen) · (Gewehre) · Waffenzubehör</div></div><div class="sub-card"><div class="sub-card-title">Werkzeugbau</div><div class="sub-card-body">Axt · Hammer · Sichel · Spaten · Pickaxe</div></div><div class="sub-card"><div class="sub-card-title">Basenbau</div><div class="sub-card-body">Gebäude · Fallen · Türme · Elektrozaun · Flammenwerfer · Windräder · Solaranlage</div></div><div class="sub-card"><div class="sub-card-title">Maschinenbau</div><div class="sub-card-body">Aufklärungsdrohne · Angriffsdrohne · Minendrohne · Angriffsroboter · Transportroboter</div></div></div>`},
+  { id:'fahrzeuge', num:'08', icon:'🚗', title:'Fahrzeuge', img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&q=60',
+    content:`<div class="pills"><span class="pill">Roboter</span><span class="pill">Quad</span><span class="pill">Motorrad (1–2 Sitze)</span><span class="pill">Kleinwagen (2 Sitze)</span><span class="pill">Mittelklasse (4 Sitze)</span><span class="pill">Pickup (4 Sitze)</span><span class="pill">Van (6 Sitze)</span><span class="pill">LKW (extrem laut)</span><span class="pill">Pferd</span><span class="pill special">Lastenfahrrad (Mittel-Start)</span></div><p class="note">Alle Fahrzeuge auch als E-Version · Benzin nur an Tankstellen/verlassenen Fahrzeugen · Sitze ausbaubar für mehr Lagerplatz</p>`},
+  { id:'inventar', num:'09', icon:'🎒', title:'Inventar & Ressourcen', img:'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=60',
+    content:`<div class="sub-grid"><div class="sub-card"><div class="sub-card-title">Inventar</div><div class="sub-card-body">Rucksack · Gürtel · Jacke · erweiterbar durch Kleidung</div></div><div class="sub-card"><div class="sub-card-title">Materialien</div><div class="sub-card-body">Holz · Metall (nur durch Schrott) · Glas (selten, schwer transportierbar)</div></div><div class="sub-card"><div class="sub-card-title">Loot-Highlights</div><div class="sub-card-body">Elektrische Bauteile · Medikamente · Munition · Kühlschrank/Herd (nur per Auto)</div></div></div>`},
+  { id:'farmkochen', num:'10', icon:'🌾', title:'Farm, Kochen & Schneider', img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=60',
+    content:`<div class="sub-grid"><div class="sub-card"><div class="sub-card-title">Farm</div><div class="sub-card-body">Gemüse, Obst, Heilkräuter, Gewürze · Tiere: Hühner, Schweine, Kühe, Pferde, Gänse</div></div><div class="sub-card"><div class="sub-card-title">Kochen</div><div class="sub-card-body">Suppen, Braten, Brot, Trockenfleisch, Reiseproviant · Zutaten aus Farm oder Loot</div></div><div class="sub-card"><div class="sub-card-title">Schneider</div><div class="sub-card-body">Freizeitkleidung · Schutzkleidung (Kevlar/Metall) · Rucksäcke · Repliken von Trikots</div></div></div>`},
+  { id:'schwierigkeit', num:'11', icon:'⚖️', title:'Schwierigkeitsgrad', img:'https://images.unsplash.com/photo-1509803874385-db7c23652552?w=800&q=60',
+    content:`<div class="diff-row"><div class="diff-box"><div class="diff-box-title easy">Easy</div><div class="diff-box-sub">Berika (fiktiv ~ USA)</div><ul><li>Viele Waffen überall</li><li>Kleines Startfahrzeug</li><li>Leiche 1h geschützt</li><li>Freunde können Leiche looten</li></ul></div><div class="diff-box"><div class="diff-box-title medium">Mittel</div><div class="diff-box-sub">Fiktive europ. Stadt (TBD)</div><ul><li>Schusswaffen selten</li><li>Nahkampfwaffen öfter als Hard</li><li>Lastenfahrrad zum Start</li><li>Leiche 30 Min. geschützt</li></ul></div><div class="diff-box"><div class="diff-box-title hard">Hard</div><div class="diff-box-sub">Fiktive europ. Stadt (TBD)</div><ul><li>Kaum Waffen zu finden</li><li>Waffen nur bei Gegnern/Militär</li><li>Leiche sofort lootbar</li><li>Kein Startfahrzeug</li></ul></div></div><p class="note">Rauf wechseln: nur was man am Körper trägt + eine Nahkampfwaffe · Runter wechseln: alles mitnehmen</p>`},
+  { id:'kampf', num:'12', icon:'💥', title:'Kampf & PvP', img:'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=60',
+    content:`<div class="sub-grid"><div class="sub-card"><div class="sub-card-title">PvE</div><div class="sub-card-body">Schüsse locken Gegner an · Angriffe skalieren mit Spielerlevel · Turm warnt 2–3 Tage vorher</div></div><div class="sub-card"><div class="sub-card-title">PvP</div><div class="sub-card-body">Manuell ein-/ausschaltbar · Basis muss manuell freigegeben werden</div></div></div>`},
+  { id:'handy', num:'13', icon:'📱', title:'In-Game Handy', img:'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=60',
+    content:`<p>Satelliten von Aliens zerstört — kein Internet, GPS oder Telefon. Nur Offline-Apps verfügbar.</p><div class="pills" style="margin-top:10px"><span class="pill">Uhrzeit/Datum</span><span class="pill">Wecker</span><span class="pill">Kalender</span><span class="pill">Notizen</span><span class="pill">Maps</span><span class="pill">Kompass</span><span class="pill">Kamera</span><span class="pill">WIKI (Alien-Aktivitäten)</span></div>`},
+  { id:'handel', num:'14', icon:'🤝', title:'Handelssystem', img:'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=60',
+    content:`<div class="sub-grid"><div class="sub-card"><div class="sub-card-title">Keine Währung</div><div class="sub-card-body">Reines Tauschsystem. Wert entsteht durch Angebot und Nachfrage.</div></div><div class="sub-card"><div class="sub-card-title">Langsamer Tausch</div><div class="sub-card-body">Fairer Marktwert — dauert bis jemand tauscht. Maximaler Gegenwert.</div></div><div class="sub-card"><div class="sub-card-title">Schneller Tausch</div><div class="sub-card-body">Halber Marktwert — sofortiger Tausch. Wer es eilig hat verliert Wert.</div></div><div class="sub-card"><div class="sub-card-title">USB-Sticks</div><div class="sub-card-body">Rolle noch offen — mögliche Nutzung für Daten/Dokumente/Karten</div></div></div>`},
+  { id:'namen', num:'15', icon:'🌍', title:'Fiktive Orts- & Ländernamen', img:'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&q=60',
+    content:`<table class="city-tbl"><tr><th>Echt (nicht verwenden)</th><th>Fiktiv</th></tr><tr><td>USA / Amerika</td><td>Berika / USB</td></tr><tr><td>Europa</td><td>Euronia</td></tr><tr><td>Deutschland</td><td>Germalia</td></tr><tr><td>England / UK</td><td>Britmark / Engmark</td></tr><tr><td>Frankreich</td><td>Frankalia</td></tr><tr><td>Russland</td><td>Ruskov</td></tr></table><p class="note">Alle Teams, Bands, Verlage ebenfalls fiktiv. Ggf. echte Kooperationen später möglich.</p>`},
+  { id:'collectibles', num:'16', icon:'🏆', title:'Collectibles & Achievements', img:'https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=800&q=60',
+    content:`<div class="sub-grid"><div class="sub-card"><div class="sub-card-title">Comics</div><div class="sub-card-body">Erstmal nur Cover. Später: gezeichnete Panels. Kooperation mit Indie-Künstlern möglich.</div></div><div class="sub-card"><div class="sub-card-title">Schallplatten</div><div class="sub-card-body">Abspielbar mit Plattenspieler in der Basis. Stimmungsboost. Kooperation mit Bands möglich.</div></div><div class="sub-card"><div class="sub-card-title">Trading Cards</div><div class="sub-card-body">Einfaches Sammelkartensystem. Simples Artwork. Reine Sammel- und Handelsobjekte.</div></div><div class="sub-card"><div class="sub-card-title">Trikots & Sportmemorabilien</div><div class="sub-card-body">Fiktive Teams und Ligen. Statussymbol. Schneider kann Repliken machen.</div></div><div class="sub-card"><div class="sub-card-title">Spielzeug & Figuren</div><div class="sub-card-body">Fiktive Actionfiguren aus Vor-Invasions-Popkultur. Ironischer Bezug zu Aliens.</div></div><div class="sub-card"><div class="sub-card-title">Fotos & Dokumente</div><div class="sub-card-body">Tagebücher, Familienfotos, Postkarten — Storyelemente</div></div><div class="sub-card"><div class="sub-card-title">Luxusgüter & Kuriositäten</div><div class="sub-card-body">Whiskey, Wein, Uhren, Alien-Artefakte mit unbekannter Funktion</div></div><div class="sub-card"><div class="sub-card-title">Condition-Rating (1–10)</div><div class="sub-card-body">Grober Bereich bei wenig Skill, exakt mit Collector-Skill. Optische Schäden sichtbar.</div></div></div>`},
+  { id:'weltbedrohung', num:'17', icon:'🚨', title:'Weltbedrohung spürbar halten', img:'https://images.unsplash.com/photo-1580136579312-94651dfd596d?w=800&q=60',
+    content:`<div class="sub-grid"><div class="sub-card"><div class="sub-card-title">Passiv</div><div class="sub-card-body">Alien-Drohnen am Himmel · ferne Explosionen · Plattenspieler durch Störsignale unterbrochen</div></div><div class="sub-card"><div class="sub-card-title">Aktiv</div><div class="sub-card-body">Skalierte Angriffe · Turm warnt 2–3 Tage vorher · Gebiete bei Inaktivität zurückerobert</div></div><div class="sub-card"><div class="sub-card-title">Informativ</div><div class="sub-card-body">Handy-WIKI mit Alien-Aktivitäten · Händler-NPCs bringen Neuigkeiten</div></div></div>`}
+];
+
+// BUILD
+const container = document.getElementById('sectionsContainer');
+sections.forEach(sec => {
+  const el = document.createElement('div');
+  el.className = 'gdd-card';
+  el.id = 'sec-' + sec.id;
+  el.innerHTML = `
+    <div class="gdd-card-header" onclick="toggleSection('${sec.id}')">
+      <div class="card-left">
+        <span class="card-num">${sec.num}</span>
+        <div class="card-icon-wrap">${sec.icon}</div>
+        <span class="card-title">${sec.title}</span>
+      </div>
+      <div class="card-right">
+        <span class="ccount" id="count-${sec.id}">0 Kommentare</span>
+        <span class="chevron">▼</span>
+      </div>
+    </div>
+    <div class="gdd-card-body">
+      <div class="card-img-header">
+        <img src="${sec.img}" alt="${sec.title}" loading="lazy">
+        <div class="card-img-header-overlay"></div>
+      </div>
+      <div class="sec-content">${sec.content}</div>
+      <div class="comments-area">
+        <div class="ctitle">Kommentare</div>
+        <div class="comment-list" id="comments-${sec.id}"><div class="no-comments">Noch keine Kommentare. Sei der Erste!</div></div>
+        <div id="form-${sec.id}"><div class="login-prompt">Um zu kommentieren, bitte <span onclick="openModal()">einloggen</span>.</div></div>
+      </div>
+    </div>`;
+  container.appendChild(el);
+});
+
+function toggleSection(id) {
+  const el = document.getElementById('sec-' + id);
+  el.classList.toggle('open');
+  if (el.classList.contains('open')) loadComments(id);
+}
+
+function openModal() { document.getElementById('loginModal').classList.add('open'); setTimeout(()=>document.getElementById('nameInput').focus(),100); }
+function closeModal() { document.getElementById('loginModal').classList.remove('open'); }
+function doLogin() {
+  const name = document.getElementById('nameInput').value.trim();
+  if (!name) return;
+  currentUser = name;
+  localStorage.setItem('gdd_username', name);
+  updateNavUser(); closeModal(); updateForms();
+}
+document.getElementById('nameInput').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+document.getElementById('loginModal').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal(); });
+
+function updateNavUser() {
+  if (currentUser) {
+    document.getElementById('navUser').textContent = currentUser;
+    document.getElementById('navBtn').textContent = 'Abmelden';
+    document.getElementById('navBtn').onclick = logout;
+  } else {
+    document.getElementById('navUser').textContent = '';
+    document.getElementById('navBtn').textContent = 'Einloggen';
+    document.getElementById('navBtn').onclick = openModal;
+  }
+}
+function logout() { currentUser = null; localStorage.removeItem('gdd_username'); updateNavUser(); updateForms(); }
+
+function updateForms() {
+  sections.forEach(sec => {
+    const f = document.getElementById('form-' + sec.id);
+    if (!f) return;
+    if (currentUser) {
+      f.innerHTML = `<div class="comment-form"><textarea class="comment-input" id="input-${sec.id}" placeholder="Dein Kommentar..." rows="2"></textarea><button class="comment-submit" id="btn-${sec.id}" onclick="submitComment('${sec.id}')">Senden</button></div>`;
+    } else {
+      f.innerHTML = `<div class="login-prompt">Um zu kommentieren, bitte <span onclick="openModal()">einloggen</span>.</div>`;
+    }
+  });
+}
+
+let firebaseReady = false;
+document.addEventListener('firebase-ready', () => { firebaseReady = true; loadAllCounts(); updateForms(); });
+
+async function loadAllCounts() {
+  if (!firebaseReady) return;
+  const { collection, getDocs } = window.fbModules;
+  let total = 0;
+  for (const sec of sections) {
+    try {
+      const snap = await getDocs(collection(window.db, 'comments_' + sec.id));
+      total += snap.size;
+      updateCount(sec.id, snap.size);
+    } catch(e) {}
+  }
+  document.getElementById('totalComments').textContent = total;
+}
+
+async function loadComments(sectionId) {
+  if (!firebaseReady) return;
+  const { collection, getDocs, query, orderBy } = window.fbModules;
+  const listEl = document.getElementById('comments-' + sectionId);
+  listEl.innerHTML = '<div class="no-comments" style="color:var(--muted)">Lädt...</div>';
+  try {
+    const q = query(collection(window.db, 'comments_' + sectionId), orderBy('createdAt', 'asc'));
+    const snap = await getDocs(q);
+    if (snap.empty) { listEl.innerHTML = '<div class="no-comments">Noch keine Kommentare. Sei der Erste!</div>'; return; }
+    listEl.innerHTML = '';
+    snap.forEach(doc => {
+      const d = doc.data();
+      const time = d.createdAt ? new Date(d.createdAt.seconds*1000).toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '';
+      listEl.innerHTML += `<div class="comment-item"><div class="comment-header"><span class="comment-author">${d.author}</span><span class="comment-time">${time}</span></div><div class="comment-body">${d.text}</div></div>`;
+    });
+    updateCount(sectionId, snap.size);
+  } catch(e) {
+    listEl.innerHTML = '<div class="no-comments" style="color:var(--accent)">Firebase noch nicht konfiguriert.</div>';
+  }
+}
+
+async function submitComment(sectionId) {
+  if (!firebaseReady || !currentUser) return;
+  const input = document.getElementById('input-' + sectionId);
+  const btn = document.getElementById('btn-' + sectionId);
+  const text = input.value.trim();
+  if (!text) return;
+  btn.disabled = true; btn.textContent = '...';
+  try {
+    const { collection, addDoc, serverTimestamp } = window.fbModules;
+    await addDoc(collection(window.db, 'comments_' + sectionId), { author: currentUser, text, createdAt: serverTimestamp() });
+    input.value = '';
+    await loadComments(sectionId);
+  } catch(e) { alert('Fehler. Ist Firebase konfiguriert?'); }
+  btn.disabled = false; btn.textContent = 'Senden';
+}
+
+function updateCount(sectionId, count) {
+  const el = document.getElementById('count-' + sectionId);
+  if (!el) return;
+  el.textContent = count === 1 ? '1 Kommentar' : count + ' Kommentare';
+  el.classList.toggle('has', count > 0);
+}
+</script>
+</body>
+</html>
