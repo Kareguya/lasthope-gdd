@@ -195,7 +195,10 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: rgba
 
 footer { border-top: 1px solid var(--border); padding: 2.5rem; text-align: center; }
 footer p { font-family: var(--fm); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-</style>
+.sub-card-body ul { margin:0; padding-left:18px; }
+    .sub-card-body ul li { margin-bottom:5px; }
+    .sub-card-body strong { color:#e8e8e8; }
+    </style>
 </head>
 <body>
 
@@ -269,59 +272,580 @@ const sections = [
   { id:'story', num:'01', icon:'📖', title:'Story', img:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=60',
     content:`<h3 style='font-size:15px;font-weight:600;color:var(--text-primary);margin-bottom:10px;'>Die Invasion der Fremden: Der Kampf ums Überleben</h3><p>Die Erde, wie wir sie kannten, existiert nicht mehr. Vor Monaten kamen sie – fremdartige Wesen aus einer anderen Welt. Ihre Technologie war weit fortschrittlicher als alles, was wir je gesehen hatten, und unsere Verteidigung wurde innerhalb weniger Tage ausgelöscht. Die Hauptarmee der Aliens zog nach ihrer schnellen und brutalen Invasion wieder ab. Zurück blieb eine unaufhaltsame Garnison aus Maschinen und Soldaten, die nur eine einzige Aufgabe hatten: Die Abbauanlagen, die überall auf dem Planeten errichtet wurden, um jeden Preis zu schützen.</p><p style='margin-top:8px;'>Für die Aliens war die Erde nun ein ausgebeuteter Rohstoffplanet. Menschen bedeuteten ihnen nichts. Die wenigen Überlebenden waren nicht mehr als Insekten in den Augen der Invasoren.</p><p style='margin-top:8px;'>Doch wir Menschen geben nicht so leicht auf. Verstreut und geschwächt haben wir uns in die tiefsten Winkel der zerstörten Städte, unterirdischen Bunker und Wälder zurückgezogen. Wir mussten handeln, bevor der Planet vollkommen ausgeplündert war.</p><p style='margin-top:8px;'><strong style='color:var(--text-primary);'>Kira</strong>, eine entschlossene Anführerin des Widerstands, begann mit einem neuen Plan: Eine Basis aufzubauen, versteckt vor den Augen der feindlichen Maschinen.</p><p style='margin-top:10px;font-style:italic;border-left:2px solid #c8441a;padding-left:12px;color:#888;'>"Wir können nicht ewig fliehen. Aber wir können lernen, uns zu verteidigen. Wenn wir genug Ressourcen finden, wenn wir die richtigen Technologien bergen, dann haben wir vielleicht eine Chance, sie zu schlagen." — Kira</p><p style='margin-top:10px;font-weight:600;color:var(--text-primary);'>Die Mission der Überlebenden war klar:</p><ol style='margin-left:1.2rem;margin-top:6px;display:flex;flex-direction:column;gap:8px;'><li style='font-size:13px;color:#888;line-height:1.6;'><strong style='color:#ede9e0;'>Bauen und Überleben:</strong> Jeder Stein, jede Metallplatte aus den Ruinen konnte entscheidend sein. Die Basis musste wachsen.</li><li style='font-size:13px;color:#888;line-height:1.6;'><strong style='color:#ede9e0;'>Expeditionen und Erkundung:</strong> Verlassene Städte, alte Militärbunker und Alien-Schlachtfelder – voller Gefahren, aber auch voller Möglichkeiten.</li><li style='font-size:13px;color:#888;line-height:1.6;'><strong style='color:#ede9e0;'>Forschung und Gegenangriff:</strong> Die Alien-Technologie verstehen und nutzen. Sie sind nicht unbesiegbar.</li></ol><p style='margin-top:12px;font-style:italic;color:#c8441a;'>"Es gibt immer einen Weg. Und wenn wir ihn gefunden haben, dann werden wir sie zu Fall bringen. Nicht für uns. Sondern für all das, was sie uns genommen haben." — Kira</p>`},
   { id:'kernziele', num:'02', icon:'🎯', title:'Kernziele', img:'https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=800&q=60',
-    content:`<div class="sub-grid"><div class="sub-card"><div class="sub-card-title">Aufbauen</div><div class="sub-card-body">Die Basis ist das Herzstück des Spiels. Gebäude errichten, Wände und Dächer bauen, Strom erzeugen über Windräder, Wasserräder oder Generatoren. Verteidigungsanlagen wie Fallen (Spikefallen, Panzersperren, Elektrozäune), Geschütztürme und Flammenwerfer schützen vor Angriffen. Türme ermöglichen es, Alien-Angriffe 2–3 Tage im Voraus zu erkennen.</div></div><div class="sub-card"><div class="sub-card-title">Erkunden</div><div class="sub-card-body">Die Welt draußen ist gefährlich aber notwendig. Überlebende finden und als NPCs in die Basis holen, Kontakte knüpfen für Handel oder spätere Raids, Alien-Einrichtungen und Abbauanlagen auskundschaften. Je weiter man sich von der Basis entfernt, desto besseres Loot — aber auch desto gefährlichere Gegner.</div></div><div class="sub-card"><div class="sub-card-title">Verteidigen</div><div class="sub-card-body">Die Aliens greifen regelmäßig an — und werden stärker. Angriffe skalieren mit dem Durchschnittslevel der Bewohner und der Anzahl der anwesenden Spieler. Auch andere Überlebende können die Basis angreifen. Wer die Basis aktiv verteidigt und ausbaut, hat bessere Chancen zu überleben.</div></div><div class="sub-card"><div class="sub-card-title">Überleben</div><div class="sub-card-body">Nahrung, Wasser und Ausdauer müssen ständig im Blick behalten werden. Langfristig: autark werden durch Farm und eigene Wasserversorgung, Ausrüstung verbessern, Fahrzeuge bauen, Alien-Technologie erforschen und die Abbauanlagen der Aliens zerstören — das ultimative Ziel.</div></div></div>`},
+    content:`<div class="sub-grid">
+<div class="sub-card"><div class="sub-card-title">🏗️ Aufbauen</div><div class="sub-card-body"><ul>
+<li>Gebäude errichten: Wände, Böden, Fenster, Türen, Dächer, Treppen, Leitern</li>
+<li>Strom erzeugen: Windräder, Wasserräder, Solaranlage, Generatoren, E-Auto-Akkus</li>
+<li>Verteidigungsanlagen: Spikefallen, Panzersperren, Elektrozäune, Geschütztürme, Flammenwerfer, Minen</li>
+<li>Turm baut man früh: erkennt Alien-Angriffe <strong>2–3 Tage im Voraus</strong></li>
+<li>Basis wächst mit Bewohnern — mehr NPCs = mehr Bedarf = mehr Aufbau</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🧭 Erkunden</div><div class="sub-card-body"><ul>
+<li>Überlebende finden und als NPCs rekrutieren</li>
+<li>Alien-Einrichtungen und Abbauanlagen auskundschaften</li>
+<li>Kontakte knüpfen für Handel und spätere Raids</li>
+<li><strong>Je weiter von der Basis</strong> → besseres Loot, gefährlichere Gegner</li>
+<li>Nicht besuchte Gebiete werden von Aliens zurückerobert</li>
+<li>Scouts melden Feindkontakt — Späher nie entkommen lassen</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🛡️ Verteidigen</div><div class="sub-card-body"><ul>
+<li>Aliens greifen regelmäßig an — und werden <strong>mit dem Spielerfortschritt stärker</strong></li>
+<li>Angriffe skalieren mit Durchschnittslevel der Bewohner und Spielerzahl</li>
+<li>Auch andere Spieler können die Basis angreifen (PvP)</li>
+<li>Turm gibt 2–3 Tage Vorwarnzeit → Zeit zur Vorbereitung</li>
+<li>Gutes Essen vor Angriffen kochen → alle Bewohner bekommen Buffs</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🌱 Überleben</div><div class="sub-card-body"><ul>
+<li>Nahrung, Wasser und Ausdauer ständig im Blick behalten</li>
+<li>Langfristig autark werden: eigene Farm, Wasserversorgung, Strom</li>
+<li>Ausrüstung verbessern, Fahrzeuge bauen und reparieren</li>
+<li>Alien-Technologie erforschen und nutzbar machen</li>
+<li><strong>Ultimatives Ziel:</strong> Alle Abbauanlagen zerstören und die Aliens vertreiben</li>
+</ul></div></div>
+</div>`},
   { id:'welt', num:'03', icon:'🗺️', title:'Welt & Karte', img:'map.jpg',
-    content:`<div class="sub-grid"><div class="sub-card" style="grid-column:1/-1;"><div class="sub-card-title">Zonenmodell</div><div class="sub-card-body">Rundes Modell: sicherer Kern → nach außen immer gefährlicher und besseres Loot</div><img src='map.jpg' alt='Zonenmodell' style='width:100%;border-radius:4px;margin-top:10px;display:block;'></div><div class="sub-card"><div class="sub-card-title">Reisen</div><div class="sub-card-body">Für jede Reise wird Verpflegung benötigt — je weiter das Ziel, desto mehr Proviant muss eingeplant werden. Essen kann verderben, also muss passendes Reiseproviant gewählt werden. Es gibt zwei Reisemodi: Schnellreise (hohes Risiko, vom Gegner entdeckt zu werden und die Reise wird unterbrochen) und Langsame Reise (niedriges Risiko). Zusätzlich ist eine manuelle Reise von Gebiet zu Gebiet möglich.</div></div><div class="sub-card"><div class="sub-card-title">Gebiete & Kontrolle</div><div class="sub-card-body">Gebiete werden in der Entfernung angezeigt. Wer ein Gebiet nicht regelmäßig besucht, riskiert dass die Aliens es zurückerobern. Bestimmte Bereiche sind durch natürliche Barrieren wie Berge, Meer oder Seen geschützt. Der Startpunkt kann frei gewählt werden — je nachdem wie viel man erkunden möchte, sinkt der sichere Bereich aus dem ein Angriff kommen kann.</div></div></div>`},
+    content:`<div class="sub-grid">
+<div class="sub-card" style="grid-column:1/-1;"><div class="sub-card-title">🎯 Zonenmodell</div><div class="sub-card-body">
+<p style="font-size:12px;color:#999;margin-bottom:10px;">Rundes Modell — sicherer Kern in der Mitte, nach außen hin immer gefährlicher aber auch besseres Loot.</p>
+<img src="map.jpg" alt="Zonenmodell" style="width:100%;border-radius:4px;margin-top:8px;display:block;">
+</div></div>
+<div class="sub-card"><div class="sub-card-title">🚗 Reisen</div><div class="sub-card-body"><ul>
+<li>Jede Reise braucht <strong>Proviant</strong> — je weiter das Ziel, desto mehr</li>
+<li>Essen kann unterwegs verderben — richtiges Reiseproviant wählen</li>
+<li>⚡ <strong>Schnellreise:</strong> hohes Entdeckungsrisiko, Reise kann unterbrochen werden</li>
+<li>🐢 <strong>Langsame Reise:</strong> sicher, niedriges Risiko, mehr Zeit</li>
+<li>Manuelle Reise von Zone zu Zone ebenfalls möglich</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🗺️ Gebiete & Kontrolle</div><div class="sub-card-body"><ul>
+<li>Gebiete in der Entfernung werden auf der Karte angezeigt</li>
+<li>Wer ein Gebiet <strong>nicht regelmäßig besucht</strong> → Aliens erobern es zurück</li>
+<li>Natürliche Barrieren schützen bestimmte Bereiche: Berge, Meer, Seen</li>
+<li>Startpunkt frei wählbar — beeinflusst den sicheren Bereich</li>
+<li>Je mehr Gebiete kontrolliert werden, desto mehr Ressourcen fließen ein</li>
+</ul></div></div>
+</div>`},
   { id:'charakter', num:'04', icon:'⚔️', title:'Charakter & Stats', img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=60',
-    content:`<p style='font-size:13px;color:#888;line-height:1.7;margin-bottom:12px;'>Es gibt kein klassisches Levelup-System. Alle Attribute verbessern sich durch tatsächliches Benutzen und Ausüben — wer viel kämpft wird stärker, wer viel kocht wird besser im Kochen. Auch die Beherrschung von Waffen und Werkzeugen steigt durch Verwendung.</p><div class="sub-grid"><div class="sub-card"><div class="sub-card-title">Stärke</div><div class="sub-card-body">Bestimmt die physische Kraft des Charakters. Beeinflusst den Schaden im Nahkampf, die maximale Tragkraft (je mehr Gewicht man schleppt, desto höher der Ausdauerverbrauch) und die Einschüchterungswirkung auf andere. Wird durch regelmäßiges Kämpfen und Fitnessgeräte verbessert.</div></div><div class="sub-card"><div class="sub-card-title">Geschick</div><div class="sub-card-body">Beeinflusst Beweglichkeit, Reflexe, Genauigkeit beim Schießen und die Fähigkeit Angriffen auszuweichen. Wichtig für Fernkämpfer und schnelle Spieler die lieber ausweichen als einstecken.</div></div><div class="sub-card"><div class="sub-card-title">Konstitution</div><div class="sub-card-body">Bestimmt die maximalen Lebenspunkte, die Ausdauer (Laufen und Klettern verbrauchen mehr als Gehen) und die Resistenzen gegen Krankheiten und Gifte. Kann durch Cardio-Training und gesunde Ernährung verbessert werden.</div></div><div class="sub-card"><div class="sub-card-title">Intelligenz</div><div class="sub-card-body">Beeinflusst Wissen, Logik und Zauberkraft. Wichtig für das Verstehen und Nutzen von Alien-Technologie sowie das Erforschen neuer Crafting-Rezepte.</div></div><div class="sub-card"><div class="sub-card-title">Weisheit</div><div class="sub-card-body">Bestimmt Willenskraft und Einblick. Beeinflusst wie gut der Charakter mit schwierigen Situationen umgeht und wie schnell er aus Erfahrungen lernt.</div></div><div class="sub-card"><div class="sub-card-title">Charisma</div><div class="sub-card-body">Soziale Interaktion und Führungskraft. Beeinflusst wie NPCs auf den Spieler reagieren, Handelsmöglichkeiten und die Fähigkeit andere Überlebende zu rekrutieren.</div></div></div>`},
+    content:`<p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:14px;">Kein klassisches Level-Up-System. Alle Attribute verbessern sich durch tatsächliches Benutzen — wer viel kämpft wird stärker, wer viel kocht wird besser im Kochen.</p>
+<div class="sub-grid">
+<div class="sub-card"><div class="sub-card-title">💪 Stärke</div><div class="sub-card-body"><ul>
+<li>Erhöht <strong>Nahkampfschaden</strong></li>
+<li>Erhöht maximale <strong>Tragkraft</strong> (mehr Gewicht = mehr Ausdauerverbrauch)</li>
+<li>Beeinflusst <strong>Einschüchterungswirkung</strong> auf NPCs und Gegner</li>
+<li>Steigt durch: Kämpfen, Fitnessgeräte in der Basis</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🏃 Geschick</div><div class="sub-card-body"><ul>
+<li>Verbessert <strong>Beweglichkeit</strong> und Reflexe</li>
+<li>Erhöht <strong>Schussgenauigkeit</strong> im Fernkampf</li>
+<li>Verbessert <strong>Ausweichen</strong> von Angriffen</li>
+<li>Wichtig für Fernkämpfer und schnelle Spieler</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">❤️ Konstitution</div><div class="sub-card-body"><ul>
+<li>Bestimmt maximale <strong>Lebenspunkte</strong></li>
+<li>Bestimmt <strong>Ausdauer</strong> (Laufen und Klettern kosten mehr als Gehen)</li>
+<li>Erhöht <strong>Resistenz</strong> gegen Krankheiten und Gifte</li>
+<li>Steigt durch: Cardio-Training, gesunde Ernährung</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🧠 Intelligenz</div><div class="sub-card-body"><ul>
+<li>Beeinflusst Wissen, Logik und Analyse</li>
+<li>Wichtig für <strong>Alien-Technologie</strong> verstehen und nutzen</li>
+<li>Ermöglicht Erforschung neuer <strong>Crafting-Rezepte</strong></li>
+<li>Höhere Intelligenz = schnelleres Lernen neuer Fähigkeiten</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🔮 Weisheit</div><div class="sub-card-body"><ul>
+<li>Bestimmt <strong>Willenskraft</strong> und Einblick</li>
+<li>Beeinflusst wie gut der Charakter mit <strong>Extremsituationen</strong> umgeht</li>
+<li>Erhöht die Lernrate aus Erfahrungen</li>
+<li>Beeinflusst Entscheidungsqualität in Gesprächen mit NPCs</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🗣️ Charisma</div><div class="sub-card-body"><ul>
+<li>Steuert <strong>NPC-Reaktionen</strong> auf den Spieler</li>
+<li>Verbessert <strong>Handelsmöglichkeiten</strong> und Tauschkonditionen</li>
+<li>Entscheidend beim <strong>Rekrutieren</strong> von Überlebenden</li>
+<li>Kann Konflikte zwischen NPCs schlichten</li>
+</ul></div></div>
+</div>`},
   { id:'skills', num:'05', icon:'🧠', title:'Skills & Berufe', img:'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=60',
-    content:`<div class="sub-grid"><div class="sub-card"><div class="sub-card-title">Nahkampf</div><div class="sub-card-body">Verbessert Schaden, Genauigkeit und Haltbarkeit von Nahkampfwaffen. Je mehr man mit Nahkampfwaffen kämpft, desto besser wird man darin. Gilt für alle Nahkampfwaffen von Messer bis Axt.</div></div><div class="sub-card"><div class="sub-card-title">Fernkampf</div><div class="sub-card-body">Verbessert Schaden, Genauigkeit, Nachladegeschwindigkeit und Haltbarkeit von Fernkampfwaffen. Regelmäßiges Schießen trainiert diesen Skill automatisch.</div></div><div class="sub-card"><div class="sub-card-title">Handwerk</div><div class="sub-card-body">Hergestellte Gegenstände haben eine höhere Haltbarkeit und werden schneller produziert. Werkzeuge wie Motorsägen und Nähmaschinen die in der Basis platziert werden erhöhen den Handwerk-Skill für alle in der Umgebung — auch für Spieler die sich nicht auf Handwerk spezialisiert haben.</div></div><div class="sub-card"><div class="sub-card-title">Kochen</div><div class="sub-card-body">Erhöht die Wirkung der gekochten Gerichte auf Attribute und Gesundheit. Kochgeräte wie Herd, Kochtöpfe oder Mikrowelle die in der Basis platziert werden erhöhen den Kochskill im Bereich. Mehr Kocherfahrung = stärkere Buff-Effekte durch Mahlzeiten.</div></div><div class="sub-card"><div class="sub-card-title">Schneidern</div><div class="sub-card-body">Selbst hergestellte Kleidung hat höhere Haltbarkeit und bietet besseren Schutz. Mit höherem Skill können auch Kevlar-Rüstungen und spezialisierte Ausrüstung wie Rucksäcke mit Holster oder Munitionshalter hergestellt werden.</div></div><div class="sub-card"><div class="sub-card-title">Farming</div><div class="sub-card-body">Höhere Erträge beim Anbau von Gemüse, Obst und Kräutern. Tiere auf der Farm produzieren mehr und werden gesünder. Essentiell für die langfristige Selbstversorgung der Basis.</div></div><div class="sub-card"><div class="sub-card-title">Ausdauer</div><div class="sub-card-body">Durch regelmäßiges Laufen und Klettern steigt die Ausdauer. Kann zusätzlich durch Cardio-Training mit Fitnessgeräten verbessert werden. Bestimmt wie lange man laufen, klettern und kämpfen kann bevor man erschöpft ist.</div></div><div class="sub-card" style='border-color:rgba(200,68,26,0.3);'><div class="sub-card-title" style='color:#c8441a;'>⭐ Collector</div><div class="sub-card-body">Spaßberuf. Mit niedrigem Skill sieht man nur einen groben Rating-Bereich eines Sammelstücks (z.B. "2–5"). Mit höherem Skill wird die Schätzung immer präziser bis hin zu einem exakten Wert. Unverzichtbar für gutes Handeln mit seltenen Gegenständen. Optische Schäden wie kaputte Ecken oder ausgeblichene Farben beeinflussen den Wert sichtbar.</div></div></div>`},
+    content:`<div class="sub-grid">
+<div class="sub-card"><div class="sub-card-title">⚔️ Nahkampf</div><div class="sub-card-body"><ul>
+<li>Verbessert <strong>Schaden, Genauigkeit und Haltbarkeit</strong> aller Nahkampfwaffen</li>
+<li>Gilt für Messer, Äxte, Keulen, Speere und Stangenwaffen</li>
+<li>Steigt automatisch durch regelmäßiges Kämpfen im Nahkampf</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🎯 Fernkampf</div><div class="sub-card-body"><ul>
+<li>Verbessert <strong>Schaden, Genauigkeit</strong> und Nachladegeschwindigkeit</li>
+<li>Erhöht Haltbarkeit von Fernkampfwaffen (Bogen, Armbrust, Schusswaffen)</li>
+<li>Steigt durch regelmäßiges Schießen — auch auf Übungszielen in der Basis</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🔧 Handwerk</div><div class="sub-card-body"><ul>
+<li>Hergestellte Gegenstände haben <strong>höhere Haltbarkeit</strong></li>
+<li>Produktion läuft <strong>schneller</strong> ab</li>
+<li>Werkzeuge in der Basis (Motorsäge, Nähmaschine) erhöhen Skill im Umkreis</li>
+<li>Auch nicht-spezialisierte Spieler profitieren von Werkzeug-Nähe</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🍳 Kochen</div><div class="sub-card-body"><ul>
+<li>Stärkere <strong>Buff-Effekte</strong> durch Mahlzeiten</li>
+<li>Buffs halten <strong>länger</strong> an mit höherem Kochskill</li>
+<li>Kochgeräte in der Basis (Herd, Kochtopf, Mikrowelle) erhöhen Skill im Bereich</li>
+<li>Koch-NPCs mit hohem Skill versorgen die ganze Basis effizienter</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🧵 Schneidern</div><div class="sub-card-body"><ul>
+<li>Hergestellte Kleidung hat <strong>höhere Haltbarkeit und besseren Schutz</strong></li>
+<li>Mit höherem Skill: Kevlar-Rüstungen und Spezialausrüstung herstellbar</li>
+<li>Rucksäcke mit Holster, Messerhalter und Munitionshalter möglich</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🌾 Farming</div><div class="sub-card-body"><ul>
+<li>Höhere <strong>Ernteerträge</strong> bei Gemüse, Obst und Kräutern</li>
+<li>Tiere auf der Farm <strong>produzieren mehr</strong> und bleiben gesünder</li>
+<li>Essentiell für langfristige <strong>Selbstversorgung</strong> der Basis</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🏃 Ausdauer</div><div class="sub-card-body"><ul>
+<li>Steigt durch regelmäßiges <strong>Laufen und Klettern</strong></li>
+<li>Cardio-Training mit Fitnessgeräten in der Basis beschleunigt Fortschritt</li>
+<li>Bestimmt wie lange man laufen, klettern und kämpfen kann ohne zu erschöpfen</li>
+</ul></div></div>
+<div class="sub-card" style="border-color:rgba(200,68,26,0.3);"><div class="sub-card-title" style="color:#c8441a;">⭐ Collector</div><div class="sub-card-body"><ul>
+<li>Niedrig: nur grober Rating-Bereich sichtbar (z.B. <strong>„2–5"</strong>)</li>
+<li>Hoch: <strong>exakter Wert</strong> eines Sammelstücks erkennbar</li>
+<li>Unverzichtbar für gutes Handeln mit seltenen Gegenständen</li>
+<li>Optische Schäden (kaputte Ecken, ausgeblichene Farben) beeinflussen Wert sichtbar</li>
+</ul></div></div>
+</div>`},
   { id:'gegner', num:'06', icon:'👾', title:'Gegner', img:'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=800&q=60',
-    content:`<p style='font-size:13px;color:#888;line-height:1.7;margin-bottom:12px;'>Die Aliens operieren in organisierten Einheiten mit klar definierten Rollen. Sie patrouillieren in Gruppen und reagieren taktisch auf Feindkontakt. Je weiter man sich von der Basis entfernt, desto stärker und besser ausgerüstet sind die Gegner.</p><div class="sub-grid"><div class="sub-card"><div class="sub-card-title">Alien Kommander</div><div class="sub-card-body">Der Anführer jeder Patrouille. Patrouilliert stets zusammen mit einem Fernkampf-Soldaten, einem Nahkampf-Soldaten und einem Tierzähmer. Koordiniert die Gruppe und gibt Befehle bei Feindkontakt.</div></div><div class="sub-card"><div class="sub-card-title">Fernkampf-Soldat</div><div class="sub-card-body">Spezialisiert auf Distanzkampf. Trägt leichte Rüstung für maximale Beweglichkeit. Bei Feindkontakt geht er sofort in Deckung und greift gezielt aus der Entfernung an.</div></div><div class="sub-card"><div class="sub-card-title">Nahkampf-Soldat</div><div class="sub-card-body">Schwer gepanzert und aggressiv. Bewaffnet mit einem Alien-Schwert und einer Pistole. Bei Feindkontakt stürmt er sofort nach vorne — kein Ausweichen, nur Angriff.</div></div><div class="sub-card"><div class="sub-card-title">Tierzähmer</div><div class="sub-card-body">Ein Fernkämpfer der als Summoner fungiert. Bei Kontakt versteckt er sich und schickt seine gezähmten Tiere in den Kampf. Erst wenn keine Tiere mehr da sind wechselt er in den Nahkampf mit Messer und Pistole.</div></div><div class="sub-card"><div class="sub-card-title">Scout / Späher</div><div class="sub-card-body">Erkundet eigenständig die Umgebung und meldet Feindkontakt dem Kommander. Greift selbst nicht an — stattdessen haut er ab sobald er den Spieler entdeckt. Achtung: Entkommt er, wird der Spieler im nächsten Gebiet definitiv auf Gegner stoßen.</div></div><div class="sub-card"><div class="sub-card-title">Mutierte Tiere</div><div class="sub-card-body">Kleine, schwache Tiere wurden von stärkeren gefressen. Nur noch große, gefährliche Tiere haben überlebt. Können von Alien-Tierzähmern eingesetzt werden. Rare Drop: Mit Alien-Technologie kann man auch selbst Tiere zähmen.</div></div><div class="sub-card"><div class="sub-card-title">Mutierte Pflanzen</div><div class="sub-card-body">Giftpflanzen die bei Kontakt oder zur Verteidigung Gift aussondern. Erscheinen häufiger in den äußeren, gefährlicheren Zonen.</div></div><div class="sub-card" style='border-color:rgba(200,68,26,0.5);'><div class="sub-card-title" style='color:#c8441a;'>⚠️ Der Predator</div><div class="sub-card-body">Hat sich unbemerkt auf einem Alien-Schiff versteckt — selbst die Aliens wissen nicht dass er dabei ist. Extrem seltener Encounter. Die meisten Spieler werden ihn nie treffen. Details noch in Entwicklung.</div></div></div>`},
+    content:`<p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:14px;">Aliens operieren in organisierten Einheiten mit klar definierten Rollen. Je weiter von der Basis, desto stärker und besser ausgerüstet sind die Gegner.</p>
+<div class="sub-grid">
+<div class="sub-card"><div class="sub-card-title">👑 Alien Kommander</div><div class="sub-card-body"><ul>
+<li>Anführer jeder Patrouille — koordiniert die gesamte Gruppe</li>
+<li>Immer begleitet von: Fernkampf-Soldat, Nahkampf-Soldat, Tierzähmer</li>
+<li>Gibt Befehle bei Feindkontakt — Gruppe reagiert taktisch</li>
+<li>Prioritätsziel — ohne Kommander ist die Gruppe weniger koordiniert</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🏹 Fernkampf-Soldat</div><div class="sub-card-body"><ul>
+<li>Spezialisiert auf Distanzkampf mit Alien-Waffe</li>
+<li>Leichte Rüstung für maximale <strong>Beweglichkeit</strong></li>
+<li>Bei Feindkontakt: sofort in Deckung gehen, gezielt aus der Ferne angreifen</li>
+<li>Gefährlich in Kombination mit Nahkämpfer — einer bindet, einer schießt</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🗡️ Nahkampf-Soldat</div><div class="sub-card-body"><ul>
+<li><strong>Schwer gepanzert</strong>, aggressiv, kein Ausweichen</li>
+<li>Bewaffnet mit Alien-Schwert und Pistole als Backup</li>
+<li>Bei Feindkontakt: sofort nach vorne stürmen</li>
+<li>Primäres Ziel des Spielers sollte er zuerst sein — hält viel aus</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🦁 Tierzähmer</div><div class="sub-card-body"><ul>
+<li>Fernkämpfer der als <strong>Beschwörer</strong> fungiert</li>
+<li>Bei Kontakt: versteckt sich und schickt gezähmte Tiere vor</li>
+<li>Erst wenn alle Tiere tot sind: wechselt zu Messer + Pistole</li>
+<li>Rare Drop: Alien-Technologie die dem Spieler selbst das Zähmen ermöglicht</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">👁️ Scout / Späher</div><div class="sub-card-body"><ul>
+<li>Erkundet eigenständig die Umgebung</li>
+<li>Greift <strong>nicht selbst an</strong> — flieht bei Feindkontakt</li>
+<li>⚠️ Entkommt er, trifft man im <strong>nächsten Gebiet garantiert auf Gegner</strong></li>
+<li>Scouts lautlos und schnell ausschalten ist Priorität</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🐺 Mutierte Tiere</div><div class="sub-card-body"><ul>
+<li>Schwache Tiere wurden gefressen — nur <strong>große, gefährliche</strong> haben überlebt</li>
+<li>Können von Tierzähmern im Kampf eingesetzt werden</li>
+<li>Erscheinen in äußeren Zonen in größerer Zahl</li>
+<li>Rare Drop: Zähmungs-Tech die dem Spieler erlaubt Tiere selbst zu binden</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🌿 Mutierte Pflanzen</div><div class="sub-card-body"><ul>
+<li>Sondern bei Kontakt oder zur Verteidigung <strong>Gift</strong> aus</li>
+<li>Häufiger in den äußeren, gefährlicheren Zonen</li>
+<li>Manche Arten schießen Giftstacheln bei Annäherung</li>
+<li>Konstitution und Resistenz-Buffs helfen gegen ihre Effekte</li>
+</ul></div></div>
+<div class="sub-card" style="border-color:rgba(200,68,26,0.5);"><div class="sub-card-title" style="color:#c8441a;">⚠️ Der Predator</div><div class="sub-card-body"><ul>
+<li>Hat sich <strong>unbemerkt auf einem Alien-Schiff</strong> versteckt</li>
+<li>Selbst die Aliens wissen nicht dass er dabei ist</li>
+<li>Extrem seltener Encounter — die meisten Spieler werden ihn nie treffen</li>
+<li>Möglicherweise ebenfalls auf der Suche nach dem Mantel-Element</li>
+<li style="color:#888;font-style:italic;">Details noch in Entwicklung</li>
+</ul></div></div>
+</div>`},
   { id:'crafting', num:'07', icon:'🔧', title:'Crafting & Basenbau', img:'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=800&q=60',
-    content:`<div class="sub-grid"><div class="sub-card"><div class="sub-card-title">Waffenbau — Nahkampf</div><div class="sub-card-body">Herstellbar: Messer, Keulen, Äxte, Speere, stumpfe Stangenwaffen (aus Lattenzaun, Rohr oder Brett). Schwerter sind in Entwicklung. Je höher der Handwerk-Skill, desto haltbarer und effektiver die Waffen.</div></div><div class="sub-card"><div class="sub-card-title">Waffenbau — Fernkampf</div><div class="sub-card-body">Herstellbar: Bogen und Armbrust. Pistolen und Gewehre können nur gefunden, nicht gebaut werden. Waffenzubehör wie Scopes, Schalldämpfer, Magazine und Griffe sind in Entwicklung.</div></div><div class="sub-card"><div class="sub-card-title">Werkzeugbau</div><div class="sub-card-body">Axt (Bäume fällen, Holzarbeiten), Hammer (Grundwerkzeug zum Bauen), Sichel (schneller und effizienter Pflanzen ernten), Spaten (Boden bearbeiten für die Farm), Pickaxe (Stein abbauen). Alle Werkzeuge verbessern den jeweiligen Skill durch Verwendung.</div></div><div class="sub-card"><div class="sub-card-title">Basenbau</div><div class="sub-card-body">Gebäude mit Wänden (inkl. Fenster und Türen), Böden, Flach- oder Schrägdächern, Treppen und Leitern. Zäune zur Abgrenzung. Verteidigungsanlagen: Spikefallen, Panzersperren, Elektrozäune, Geschütztürme, Flammenwerfer, Minen. Strom: Stromleitungen, Windräder, Wasserräder, Akkus aus E-Autos, Solaranlage, Generatoren (laut, hoher Treibstoffverbrauch).</div></div><div class="sub-card"><div class="sub-card-title">Maschinenbau</div><div class="sub-card-body">Drohnen: Aufklärungsdrohne (erkundet und markiert Gegner für ~3 Sek.), Angriffsdrohnen (Kleinkaliber, Flammenwerfer, Sprengladung), Minendrohne (lässt Minen fallen). Roboter: Angriffsroboter (steuerbar, verschiedene Waffen montierbar), Transportroboter (folgt dem Spieler, Lagerplatz wie großer Rucksack, Batterie leert sich schneller bei hohem Gewicht). Im Endgame: PKWs und LKWs reparieren und umbauen.</div></div></div>`},
+    content:`<div class="sub-grid">
+<div class="sub-card"><div class="sub-card-title">🗡️ Waffenbau — Nahkampf</div><div class="sub-card-body"><ul>
+<li>Messer, Keulen, Äxte, Speere</li>
+<li>Stangenwaffen aus: Lattenzaun, Rohr, Brett</li>
+<li>Schwerter in Entwicklung</li>
+<li>Höherer Handwerk-Skill → <strong>haltbarer und effektiver</strong></li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🏹 Waffenbau — Fernkampf</div><div class="sub-card-body"><ul>
+<li>Herstellbar: <strong>Bogen</strong> und <strong>Armbrust</strong></li>
+<li>Pistolen und Gewehre nur findbar — nicht baubar</li>
+<li>Zubehör in Entwicklung: Scopes, Schalldämpfer, Magazine, Griffe</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🪚 Werkzeugbau</div><div class="sub-card-body"><ul>
+<li>🪓 <strong>Axt</strong> — Bäume fällen, Holzarbeiten</li>
+<li>🔨 <strong>Hammer</strong> — Grundwerkzeug zum Bauen</li>
+<li>🌾 <strong>Sichel</strong> — schnelleres, effizienteres Ernten</li>
+<li>🪤 <strong>Spaten</strong> — Boden für die Farm bearbeiten</li>
+<li>⛏️ <strong>Pickaxe</strong> — Stein abbauen</li>
+<li>Alle Werkzeuge verbessern den jeweiligen Skill durch Verwendung</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🏠 Basenbau</div><div class="sub-card-body"><ul>
+<li>Gebäude: Wände (inkl. Fenster, Türen), Böden, Flach-/Schrägdächer, Treppen, Leitern</li>
+<li>Zäune zur Abgrenzung des Geländes</li>
+<li>Verteidigung: Spikefallen, Panzersperren, Elektrozäune, Geschütztürme, Flammenwerfer, Minen</li>
+<li>Strom: Windräder, Wasserräder, Solaranlage, E-Auto-Akkus, Generatoren (laut!)</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🤖 Maschinenbau — Drohnen</div><div class="sub-card-body"><ul>
+<li>🔍 <strong>Aufklärungsdrohne</strong> — erkundet und markiert Gegner für ~3 Sek.</li>
+<li>💥 <strong>Angriffsdrohnen</strong> — Kleinkaliber, Flammenwerfer oder Sprengladung</li>
+<li>💣 <strong>Minendrohne</strong> — lässt automatisch Minen fallen</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🦾 Maschinenbau — Roboter</div><div class="sub-card-body"><ul>
+<li>⚔️ <strong>Angriffsroboter</strong> — steuerbar, verschiedene Waffen montierbar</li>
+<li>📦 <strong>Transportroboter</strong> — folgt dem Spieler, Lagerplatz wie großer Rucksack</li>
+<li>Batterie leert sich schneller bei hohem Gewicht</li>
+<li>Endgame: PKWs und LKWs reparieren und umbauen</li>
+</ul></div></div>
+</div>`},
   { id:'fahrzeuge', num:'08', icon:'🚗', title:'Fahrzeuge', img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&q=60',
-    content:`<p style='font-size:13px;color:#888;line-height:1.7;margin-bottom:12px;'>Alle Fahrzeuge gibt es auch in einer elektrischen Version. Benzin kann nur an Tankstellen und an verlassenen Fahrzeugen gefunden werden. Sitze können ausgebaut werden um den Lagerplatz zu erhöhen.</p><div class="sub-grid"><div class="sub-card"><div class="sub-card-title">Roboter & Quad</div><div class="sub-card-body">Kleine, wendige Fahrzeuge für schnelle Erkundungen. Kein Sitzplatz für Mitfahrer, aber praktisch für Solo-Aktionen.</div></div><div class="sub-card"><div class="sub-card-title">Motorrad (1–2 Sitze)</div><div class="sub-card-body">Schnell und wendig. Kleines Lager. Ideal für schnelle Trips ohne viel Gepäck. 2 Sitze können ausgebaut werden für mehr Lagerplatz.</div></div><div class="sub-card"><div class="sub-card-title">Kleinwagen (2 Sitze)</div><div class="sub-card-body">Kompaktes Fahrzeug mit mittlerem Lager. Sitze ausbaubar für mehr Stauraum.</div></div><div class="sub-card"><div class="sub-card-title">Mittelklasse (4 Sitze)</div><div class="sub-card-body">Gute Balance zwischen Platz und Manövrierfähigkeit. 2 Sitze können ausgebaut werden für mehr Lagerplatz.</div></div><div class="sub-card"><div class="sub-card-title">Pickup (4 Sitze)</div><div class="sub-card-body">Robustes Fahrzeug mit großem Lager. Beliebt für Erkundungstouren mit Gruppe. 2 Sitze ausbaubar.</div></div><div class="sub-card"><div class="sub-card-title">Van (6 Sitze)</div><div class="sub-card-body">Viel Platz für Crew und Material. 2 oder 4 Sitze können ausgebaut werden für maximalen Lagerplatz.</div></div><div class="sub-card"><div class="sub-card-title">LKW (2/7/12 Sitze)</div><div class="sub-card-body">Extrem laut und hoher Kraftstoffverbrauch — zieht Gegner an. Dafür massiver Lagerplatz. Drei Größen verfügbar. Nur für große Transporte empfohlen.</div></div><div class="sub-card"><div class="sub-card-title">Pferd</div><div class="sub-card-body">Kein Benzin nötig. Leise. Kann als Nutztier zur Fortbewegung und für Transport eingesetzt werden. Produziert auch Leder.</div></div><div class="sub-card" style='border-color:rgba(200,68,26,0.3);'><div class="sub-card-title" style='color:#c8441a;'>Lastenfahrrad</div><div class="sub-card-body">Startvehikel im mittleren Schwierigkeitsgrad. Kein Lärm, kein Benzin — aber auch kein Schutz. Zwingt zu einem vorsichtigeren Spielstil als auf Easy.</div></div></div>`},
+    content:`<p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:14px;">Alle Fahrzeuge gibt es auch als <strong>Elektro-Version</strong>. Benzin nur an Tankstellen und verlassenen Fahrzeugen. Sitze können ausgebaut werden um Lagerplatz zu erhöhen.</p>
+<div class="sub-grid">
+<div class="sub-card"><div class="sub-card-title">🤖 Roboter & Quad</div><div class="sub-card-body"><ul>
+<li>Klein und wendig — ideal für Solo-Erkundungen</li>
+<li>Kein Sitzplatz für Mitfahrer</li>
+<li>Leise, sparsam, manövrierfähig in engen Bereichen</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🏍️ Motorrad (1–2 Sitze)</div><div class="sub-card-body"><ul>
+<li>Schnell und wendig, kleines Lager</li>
+<li>Ideal für schnelle Trips ohne viel Gepäck</li>
+<li>2. Sitz ausbaubar für <strong>mehr Stauraum</strong></li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🚗 Kleinwagen (2 Sitze)</div><div class="sub-card-body"><ul>
+<li>Kompaktes Fahrzeug, mittleres Lager</li>
+<li>Gut für Paare oder Solo mit viel Gepäck</li>
+<li>Sitze ausbaubar für mehr Stauraum</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🚙 Mittelklasse (4 Sitze)</div><div class="sub-card-body"><ul>
+<li>Gute Balance zwischen Platz und Manövrierfähigkeit</li>
+<li>Empfehlenswert für kleine Gruppen</li>
+<li>2 Sitze ausbaubar für mehr Lagerplatz</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🛻 Pickup (4 Sitze)</div><div class="sub-card-body"><ul>
+<li>Robustes Fahrzeug mit großem Lager</li>
+<li>Beliebt für Erkundungstouren mit Gruppe</li>
+<li>2 Sitze ausbaubar — maximaler Stauraum für Ressourcen</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🚐 Van (6 Sitze)</div><div class="sub-card-body"><ul>
+<li>Viel Platz für Crew und Material</li>
+<li>2 oder 4 Sitze ausbaubar für maximalen Lagerplatz</li>
+<li>Gut für große Gruppen-Expeditionen</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🚛 LKW (2 / 7 / 12 Sitze)</div><div class="sub-card-body"><ul>
+<li>⚠️ <strong>Extrem laut</strong> — zieht Gegner aus der Umgebung an</li>
+<li>⚠️ <strong>Hoher Kraftstoffverbrauch</strong> — nur für große Transporte</li>
+<li>Massiver Lagerplatz — drei Größen verfügbar</li>
+<li>Nur für Situationen wo Kapazität wichtiger ist als Tarnung</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🐴 Pferd</div><div class="sub-card-body"><ul>
+<li>Kein Benzin, keine Batterie — läuft auf <strong>Heu und Äpfeln</strong></li>
+<li>Völlig geräuschlos — kein Gegner-Alarm</li>
+<li>Transport und Fortbewegung kombinierbar</li>
+<li>Produziert auch <strong>Leder</strong> für den Schneider</li>
+</ul></div></div>
+<div class="sub-card" style="border-color:rgba(200,68,26,0.3);"><div class="sub-card-title" style="color:#c8441a;">🚲 Lastenfahrrad — Mittel-Start</div><div class="sub-card-body"><ul>
+<li>Startvehikel im <strong>mittleren Schwierigkeitsgrad</strong></li>
+<li>Kein Lärm, kein Benzin — aber auch <strong>kein Schutz</strong></li>
+<li>Zwingt zu einem vorsichtigeren Spielstil als auf Easy</li>
+<li>Gut geeignet für leise Erkundungen in frühen Spielphasen</li>
+</ul></div></div>
+</div>`},
   { id:'inventar', num:'09', icon:'🎒', title:'Inventar & Ressourcen', img:'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=60',
-    content:`<div class="sub-grid"><div class="sub-card" style="grid-column:1/-1;"><div class="sub-card-title">Inventar</div><div class="sub-card-body">Rucksack · Gürtel · Jacke · erweiterbar durch Kleidung</div><img src='inventar.jpg' alt='Inventar System' style='width:100%;border-radius:4px;margin-top:10px;display:block;'></div><div class="sub-card"><div class="sub-card-title">Materialien</div><div class="sub-card-body">Holz · Metall (nur durch Schrott) · Glas (selten, schwer transportierbar)</div></div><div class="sub-card"><div class="sub-card-title">Loot-Highlights</div><div class="sub-card-body">Elektrische Bauteile · Medikamente · Munition · Kühlschrank/Herd (nur per Auto)</div></div></div>`},
+    content:`<div class="sub-grid">
+<div class="sub-card" style="grid-column:1/-1;"><div class="sub-card-title">🎒 Inventar-System</div><div class="sub-card-body">
+<p style="font-size:12px;color:#999;margin-bottom:10px;">Inventar besteht aus mehreren Bereichen — Kleidung erweitert den verfügbaren Platz.</p>
+<img src="inventar.jpg" alt="Inventar System" style="width:100%;border-radius:4px;margin-top:8px;display:block;">
+<ul style="margin-top:12px;">
+<li>🎒 <strong>Rucksack</strong> — Hauptlager, Größe abhängig vom Rucksack-Typ</li>
+<li>👖 <strong>Gürtel</strong> — Schnellzugriff auf Waffen und Verbrauchsgüter</li>
+<li>🧥 <strong>Jacke</strong> — zusätzlicher Stauraum durch Taschen</li>
+</ul>
+</div></div>
+<div class="sub-card"><div class="sub-card-title">🪵 Materialien</div><div class="sub-card-body"><ul>
+<li>🪵 <strong>Holz</strong> — häufig, vielseitig einsetzbar, schnell verfügbar</li>
+<li>🔩 <strong>Schrott-Metall</strong> — wichtigste Metallquelle, nur aus Schrottstücken</li>
+<li>🪟 <strong>Glas</strong> — selten und schwer zu transportieren</li>
+<li>Materialien stapeln sich — effizient sammeln spart Trips</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">✨ Loot-Highlights</div><div class="sub-card-body"><ul>
+<li>⚡ <strong>Elektrische Bauteile</strong> — selten, essenziell für Maschinen</li>
+<li>💊 <strong>Medikamente</strong> — Heilung, Gegengift, Buffs</li>
+<li>🔫 <strong>Munition</strong> — wertvoll, nie verschwenden</li>
+<li>🧊 <strong>Kühlschrank / Herd</strong> — nur per Fahrzeug transportierbar, sehr schwer</li>
+<li>🛢️ <strong>Kraftstoff</strong> — nur an Tankstellen und verlassenen Fahrzeugen</li>
+</ul></div></div>
+</div>`},
   { id:'farmkochen', num:'10', icon:'🌾', title:'Farm, Kochen & Schneider', img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=60',
     content:`<div class="sub-grid">
-<div class="sub-card"><div class="sub-card-title">Farm — Pflanzen</div><div class="sub-card-body">Gemüse: Kartoffeln, Tomaten, Möhren, Zwiebeln, Kopfsalat, Mais, Weizen. Obst: Äpfel, Birnen, Kirschen, Pflaumen. Heilkräuter: Kamille, Salbei, Lavendel, Thymian. Gewürze: Cayennepfeffer, Curry, Paprika, Oregano, Ingwer. Mit höherem Farming-Skill steigen die Erträge. Schlechte Wetterbedingungen oder Alien-Angriffe können Erträge reduzieren oder die Farm zerstören.</div></div>
-<div class="sub-card"><div class="sub-card-title">Farm — Tiere & Futter</div><div class="sub-card-body">Hühner (Fleisch, Eier) → brauchen Getreide/Mais. Schweine (Fleisch) → brauchen Küchenabfälle, Gemüsereste, Mais. Kühe (Fleisch, Milch) → brauchen Gras, Heu, Mais. Pferde (Transport, Fleisch, Leder) → brauchen Heu, Äpfel, Karotten. Gänse (Fleisch, Eier, Daunen) → brauchen Gras, Getreide. Kein Futter = sinkende Produktion, Krankheit, Tod. Tiere brauchen Platz — Überfüllung senkt Produktion. Stallgebäude müssen gebaut und gewartet werden.</div></div>
-<div class="sub-card"><div class="sub-card-title">Kochen — Einfaches Essen</div><div class="sub-card-body">Gefundene Konserven, Wildobst, Militärration, belegtes Brot. Macht wenig satt — hält nicht lange an. Keine Buffs. Schnell verfügbar aber langfristig nicht ausreichend für aktive Spieler.</div></div>
-<div class="sub-card"><div class="sub-card-title">Kochen — Mittleres Essen</div><div class="sub-card-body">Einfache Suppen, Rührei, Braten mit wenigen Zutaten. Mittlere Sättigung. Kleine Buffs möglich — z.B. leichte Gesundheitsregeneration. Braucht Grundzutaten aus Farm oder Loot.</div></div>
-<div class="sub-card"><div class="sub-card-title">Kochen — Aufwendiges Essen</div><div class="sub-card-body">Mehrgängige Gerichte aus Farm-Zutaten mit seltenen Gewürzen und hohem Kochskill. Hält lange satt. Starke Buffs: Ausdauer verlängern, Stärke erhöhen, Gesundheit regenerieren, Resistenzen stärken, Kampfattribute boosten. Frisch gekocht > aufgewärmt > Konserve. Mit höherem Kochskill werden Buffs stärker und halten länger.</div></div>
-<div class="sub-card"><div class="sub-card-title">Kochen — Verderb & Lagerung</div><div class="sub-card-body">Frische Zutaten verderben nach einer gewissen Zeit. Konservieren möglich durch Trockenfleisch oder Einmachgläser — aber mit Qualitätsverlust. Kühlschrank verlangsamt das Verderben, braucht aber Strom. Verdorbenes Essen macht krank statt satt.</div></div>
-<div class="sub-card"><div class="sub-card-title">Farm — Wirtschaftlichkeit</div><div class="sub-card-body">Überschuss an Zutaten kann gehandelt werden — Nahrung ist immer gefragt. Seltene Gewürze und Heilkräuter sind wertvolle Handelsgüter. Mehr Bewohner = mehr Hunger = mehr Verbrauch. Alien-Angriffe können Farm beschädigen. Für starke Buffs braucht man immer seltene Zutaten die nicht einfach anzubauen sind — das hält die Farm dauerhaft relevant.</div></div>
-<div class="sub-card"><div class="sub-card-title">Schneider — Freizeitkleidung</div><div class="sub-card-body">Kopf: Cap, Wollmütze. Brust: BH, T-Shirt, Tanktop, Hemd, Pullover, Hoodie. Hose: Mini, Rock, kurze/mittlere Hosen, Trainingshosen, Jeans. Gürtel aus Leder. Handschuhe aus Stoff/Wolle. Schuhe aus Leder (moderne Schuhe nur findbar).</div></div>
-<div class="sub-card"><div class="sub-card-title">Schneider — Schutzkleidung</div><div class="sub-card-body">Kopf: Helm aus Metall oder Kevlar. Brust: Schutzweste mit Metallplatten, Pullover aus Kevlar. Hose: mit Metalleinlagen oder aus Kevlar. Handschuhe: Kevlar (nur aus alten Schutzwesten).</div></div>
-<div class="sub-card"><div class="sub-card-title">Schneider — Sonstiges</div><div class="sub-card-body">Innenfutter aus Gänsedaunen, Schlafsack, Bettwäsche, Gardinen, Teppich. Rucksäcke in klein, mittel, groß. Gürtel mit Holster, Messerhalter, Munitionshalter oder kleinen Taschen. Repliken von Trikots (geringerer Handelswert als Originale).</div></div>
+
+<div class="sub-card"><div class="sub-card-title">🌱 Farm — Pflanzen</div><div class="sub-card-body"><ul>
+<li><strong>Gemüse:</strong> Kartoffeln, Tomaten, Möhren, Zwiebeln, Kopfsalat, Mais, Weizen</li>
+<li><strong>Obst:</strong> Äpfel, Birnen, Kirschen, Pflaumen</li>
+<li><strong>Heilkräuter:</strong> Kamille, Salbei, Lavendel, Thymian</li>
+<li><strong>Gewürze:</strong> Cayennepfeffer, Curry, Paprika, Oregano, Ingwer</li>
+<li>Höherer Farming-Skill → höhere Erträge</li>
+<li>Schlechtes Wetter oder Alien-Angriffe können Ernte beschädigen</li>
+</ul></div></div>
+
+<div class="sub-card"><div class="sub-card-title">🐄 Farm — Tiere & Futter</div><div class="sub-card-body"><ul>
+<li>🐔 <strong>Hühner</strong> (Fleisch, Eier) → Getreide / Mais</li>
+<li>🐷 <strong>Schweine</strong> (Fleisch) → Küchenabfälle, Gemüse, Mais</li>
+<li>🐄 <strong>Kühe</strong> (Fleisch, Milch) → Gras, Heu, Mais</li>
+<li>🐴 <strong>Pferde</strong> (Transport, Fleisch, Leder) → Heu, Äpfel, Karotten</li>
+<li>🪿 <strong>Gänse</strong> (Fleisch, Eier, Daunen) → Gras, Getreide</li>
+</ul><p style="margin-top:8px;font-size:12px;color:#999;">Kein Futter → sinkende Produktion → Krankheit → Tod. Stallgebäude müssen gebaut und gewartet werden. Überfüllung senkt die Produktion.</p></div></div>
+
+<div class="sub-card"><div class="sub-card-title">📊 Farm — Wirtschaftlichkeit</div><div class="sub-card-body"><ul>
+<li>Überschuss kann gehandelt werden — Nahrung ist immer gefragt</li>
+<li>Seltene Gewürze und Heilkräuter = wertvolle Handelsgüter</li>
+<li>Mehr Bewohner = mehr Hunger = mehr Verbrauch</li>
+<li>Alien-Angriffe können die Farm beschädigen</li>
+<li>Seltene Zutaten bleiben dauerhaft relevant für starke Buffs</li>
+</ul></div></div>
+
+<div class="sub-card" style="grid-column:1/-1;"><div class="sub-card-title">🍽️ Kochen — Buff-Kategorien</div><div class="sub-card-body">
+<p style="font-size:12px;color:#999;margin-bottom:10px;">Nicht die spezifische Zutat bestimmt den Buff — sondern die <strong>Lebensmittel-Gruppe</strong>. Apfel, Birne und Banane geben denselben Buff. Der Aufwand bestimmt die Stärke.</p>
+<table style="width:100%;border-collapse:collapse;font-size:13px;">
+<tr style="border-bottom:1px solid rgba(255,107,43,0.4);"><th style="padding:7px 10px;text-align:left;color:#ff6b2b;">Gruppe</th><th style="padding:7px 10px;text-align:left;color:#ff6b2b;">Buff-Typ</th><th style="padding:7px 10px;text-align:left;color:#ff6b2b;">Beispiele</th></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:7px 10px;">🍎 Früchte</td><td style="padding:7px 10px;">Ausdauer-Regeneration</td><td style="padding:7px 10px;color:#999;">Apfel, Birne, Banane, Beeren</td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:7px 10px;">🥩 Fleisch</td><td style="padding:7px 10px;">Stärke / Tragkraft</td><td style="padding:7px 10px;color:#999;">Wildfleisch, Huhn, Schwein</td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:7px 10px;">🌾 Getreide</td><td style="padding:7px 10px;">Sättigung (lang)</td><td style="padding:7px 10px;color:#999;">Brot, Haferbrei, Reis</td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:7px 10px;">🥕 Gemüse</td><td style="padding:7px 10px;">Konstitution / Resistenz</td><td style="padding:7px 10px;color:#999;">Karotte, Kartoffel, Zwiebel</td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:7px 10px;">🧈 Fett / Öl</td><td style="padding:7px 10px;">Kälteschutz</td><td style="padding:7px 10px;color:#999;">Butter, Schmalz, Öl</td></tr>
+<tr><td style="padding:7px 10px;">🍄 Pilze</td><td style="padding:7px 10px;">Fokus / Wahrnehmung</td><td style="padding:7px 10px;color:#999;">alle Pilzarten</td></tr>
+</table>
+</div></div>
+
+<div class="sub-card"><div class="sub-card-title">⚡ Kochen — Aufwand & Stärke</div><div class="sub-card-body">
+<p style="font-size:12px;color:#999;margin-bottom:10px;">Der <strong>Aufwand</strong> bestimmt wie stark der Buff ist.</p>
+<ul>
+<li>🥩 <strong>Roh / ungekocht</strong> — schwacher Buff (5 Min.)</li>
+<li>🍳 <strong>Einfach</strong> (1 Zutat, offenes Feuer) — mittlerer Buff (15 Min.)</li>
+<li>🍲 <strong>Aufwendig</strong> (2–3 Gruppen kombiniert) — starker Buff (45 Min.)</li>
+<li>👨‍🍳 <strong>Rezept-Gericht</strong> (Kochherd + seltene Zutaten) — maximaler Buff (2 Std.)</li>
+</ul>
+</div></div>
+
+<div class="sub-card"><div class="sub-card-title">🔀 Kochen — Kombinieren & Stapeln</div><div class="sub-card-body"><ul>
+<li>Zutaten aus <strong>mehreren Gruppen</strong> → mehrere Buffs gleichzeitig</li>
+<li>Fleisch + Gemüse + Getreide → Stärke + Resistenz + Sättigung</li>
+<li>Je mehr Gruppen kombiniert → desto aufwendiger → desto stärker alle Buffs</li>
+<li>Kombinations-Gerichte brauchen einen richtigen Herd und mehr Zeit</li>
+</ul><p style="margin-top:8px;font-size:12px;color:#999;">Kein "optimales" Gericht das alles andere übertrifft — der Aufwand entscheidet, nicht die Zutat.</p></div></div>
+
+<div class="sub-card"><div class="sub-card-title">🧊 Kochen — Verderb & Lagerung</div><div class="sub-card-body"><ul>
+<li>Frische Zutaten verderben nach einer gewissen Zeit</li>
+<li>Konservieren möglich: Trockenfleisch, Einmachgläser — mit Qualitätsverlust</li>
+<li>Kühlschrank verlangsamt Verderb → braucht Strom</li>
+<li>Verdorbenes Essen macht krank statt satt</li>
+</ul></div></div>
+
+<div class="sub-card"><div class="sub-card-title">👕 Schneider — Freizeitkleidung</div><div class="sub-card-body"><ul>
+<li>🧢 <strong>Kopf:</strong> Cap, Wollmütze</li>
+<li>👚 <strong>Brust:</strong> BH, T-Shirt, Tanktop, Hemd, Pullover, Hoodie</li>
+<li>👖 <strong>Hose:</strong> Mini, Rock, kurz, mittel, Trainingshose, Jeans</li>
+<li>🥋 <strong>Gürtel:</strong> aus Leder</li>
+<li>🧤 <strong>Handschuhe:</strong> Stoff / Wolle</li>
+<li>👟 <strong>Schuhe:</strong> aus Leder (moderne Schuhe nur findbar)</li>
+</ul></div></div>
+
+<div class="sub-card"><div class="sub-card-title">🛡️ Schneider — Schutzkleidung</div><div class="sub-card-body"><ul>
+<li>⛑️ <strong>Kopf:</strong> Helm aus Metall oder Kevlar</li>
+<li>🦺 <strong>Brust:</strong> Schutzweste mit Metallplatten, Kevlar-Pullover</li>
+<li>🦵 <strong>Hose:</strong> mit Metalleinlagen oder aus Kevlar</li>
+<li>🧤 <strong>Handschuhe:</strong> Kevlar (nur aus alten Schutzwesten)</li>
+</ul></div></div>
+
+<div class="sub-card"><div class="sub-card-title">🪡 Schneider — Sonstiges</div><div class="sub-card-body"><ul>
+<li>Innenfutter aus Gänsedaunen</li>
+<li>Schlafsack, Bettwäsche, Gardinen, Teppich</li>
+<li>Rucksäcke: klein, mittel, groß</li>
+<li>Gürtel mit Holster, Messerhalter, Munitionshalter, kleinen Taschen</li>
+<li>Repliken von Trikots (geringerer Handelswert als Originale)</li>
+</ul></div></div>
+
 </div>`},
   { id:'npcs', num:'10b', icon:'👥', title:'NPC-System', img:'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=60',
-    content:`<p style='font-size:13px;color:#888;line-height:1.7;margin-bottom:12px;'>NPCs sind keine bloßen Dekoration — sie sind ein zentraler Teil der Basis. Gefunden bei der Erkundung, rekrutiert durch Charisma, leben und arbeiten sie in der Basis und müssen versorgt werden. Eine gut geführte Gemeinschaft ist der Unterschied zwischen Überleben und Untergehen.</p><div class="sub-grid">
-<div class="sub-card"><div class="sub-card-title">Finden & Rekrutieren</div><div class="sub-card-body">NPCs werden zufällig bei der Erkundung angetroffen — in Ruinen, verlassenen Gebäuden oder Wäldern. Das Charisma-Attribut des Spielers beeinflusst ob ein NPC bereit ist mitzukommen. Manche NPCs haben Bedingungen: "Ich komme nur wenn du mir zuerst bei etwas hilfst." Manche bringen bei der Rekrutierung Freunde mit — oder Feinde.</div></div>
-<div class="sub-card"><div class="sub-card-title">Skills & Spezialisierung</div><div class="sub-card-body">Jeder NPC hat eigene Skills: Handwerk, Kochen, Kämpfen, Farmen, Handel usw. Den richtigen NPC für die richtige Aufgabe einsetzen lohnt sich. Ein NPC mit hohem Kochskill produziert besseres Essen mit stärkeren Buffs für alle. Ein Handwerks-NPC baut schneller und produziert haltbarere Gegenstände.</div></div>
-<div class="sub-card"><div class="sub-card-title">Grundbedürfnisse</div><div class="sub-card-body">NPCs brauchen Unterkunft — Schlafplätze müssen gebaut werden. NPCs brauchen Essen — und zwar regelmäßig. Je mehr Bewohner die Basis hat, desto mehr Nahrung wird verbraucht. Zu wenig Platz oder Essen hat direkte Konsequenzen.</div></div>
-<div class="sub-card"><div class="sub-card-title">Stimmungs-System</div><div class="sub-card-body">Gutes Essen → gute Stimmung → produktivere NPCs. Schlechtes oder zu wenig Essen → schlechte Stimmung → langsamer, weniger produktiv. Extrem schlechte Stimmung → NPC verlässt die Basis oder verweigert Arbeit. Weitere Faktoren: Sicherheit der Basis, Komfort der Unterkunft, soziale Interaktion.</div></div>
-<div class="sub-card"><div class="sub-card-title">Arbeit & Aufgaben</div><div class="sub-card-body">NPCs können verschiedenen Aufgaben zugewiesen werden: Farmen, Kochen, Bauen, Handwerk, Wache stehen, Handeln. Spezialisierung lohnt sich — ein Koch-NPC der ständig gutes Essen produziert ist für die ganze Basis wertvoll.</div></div>
-<div class="sub-card"><div class="sub-card-title">Verteidigung & Expeditionen</div><div class="sub-card-body">NPCs verteidigen die Basis automatisch bei Angriffen. Kampfstarke NPCs können auf Expeditionen mitgenommen werden. Als Wachen eingesetzt machen sie Angriffe schwerer abzuwehren. Vor großen Alien-Angriffen: gutes Essen kochen → alle NPCs und Spieler bekommen Buffs → bessere Verteidigung.</div></div>
-<div class="sub-card"><div class="sub-card-title">Beziehungen</div><div class="sub-card-body">NPCs können untereinander Freundschaften oder Konflikte entwickeln. Der Spieler kann durch Charisma vermitteln. Gute Beziehungen in der Gemeinschaft steigern die Gesamtproduktivität. Konflikte können die Basis destabilisieren.</div></div>
-<div class="sub-card" style='border-color:rgba(200,68,26,0.3);'><div class="sub-card-title" style='color:#c8441a;'>Essen & Stimmung — der Kreislauf</div><div class="sub-card-body">Farm produziert Zutaten → Koch-NPC kocht gutes Essen → alle NPCs gut gelaunt und produktiv → Handwerks-NPCs bauen besser → Basis wird stärker → bessere Verteidigung gegen Aliens → mehr Zeit zum Farmen und Kochen. Wer diesen Kreislauf am Laufen hält hat einen massiven Vorteil.</div></div>
+    content:`<p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:14px;">NPCs sind kein Dekor — sie sind ein zentraler Teil der Basis. Eine gut geführte Gemeinschaft ist der Unterschied zwischen Überleben und Untergehen.</p>
+<div class="sub-grid">
+<div class="sub-card"><div class="sub-card-title">🔍 Finden & Rekrutieren</div><div class="sub-card-body"><ul>
+<li>Zufällig angetroffen: in Ruinen, verlassenen Gebäuden oder Wäldern</li>
+<li><strong>Charisma</strong> beeinflusst ob ein NPC mitkommt</li>
+<li>Manche haben Bedingungen: <em>„Ich komme nur wenn du mir zuerst hilfst"</em></li>
+<li>Manche bringen Freunde mit — manche bringen Feinde</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🧠 Skills & Spezialisierung</div><div class="sub-card-body"><ul>
+<li>Jeder NPC hat eigene Skills: Handwerk, Kochen, Kämpfen, Farmen, Handel</li>
+<li>Den richtigen NPC für die richtige Aufgabe einsetzen lohnt sich</li>
+<li>Koch-NPC mit hohem Skill → <strong>stärkere Buffs für alle</strong></li>
+<li>Handwerks-NPC → baut schneller, haltbarere Gegenstände</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🏠 Grundbedürfnisse</div><div class="sub-card-body"><ul>
+<li>NPCs brauchen <strong>Schlafplätze</strong> — müssen gebaut werden</li>
+<li>NPCs brauchen <strong>regelmäßig Essen</strong> — je mehr Bewohner, desto mehr Verbrauch</li>
+<li>Zu wenig Platz oder Essen → direkte Konsequenzen für Moral und Produktivität</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">😊 Stimmungs-System</div><div class="sub-card-body"><ul>
+<li>✅ Gutes Essen → gute Stimmung → produktivere NPCs</li>
+<li>⚠️ Schlechtes Essen → schlechte Stimmung → langsamer, weniger effektiv</li>
+<li>❌ Extrem schlechte Stimmung → NPC verlässt die Basis oder verweigert Arbeit</li>
+<li>Weitere Faktoren: Sicherheit der Basis, Komfort, soziale Interaktion</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">⚙️ Arbeit & Aufgaben</div><div class="sub-card-body"><ul>
+<li>Farmen, Kochen, Bauen, Handwerk</li>
+<li>Wache stehen, Handeln, Erkunden</li>
+<li>Spezialisierung lohnt sich — ein Koch der dauerhaft kocht ist für alle wertvoll</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">⚔️ Verteidigung & Expeditionen</div><div class="sub-card-body"><ul>
+<li>NPCs verteidigen die Basis <strong>automatisch</strong> bei Angriffen</li>
+<li>Kampfstarke NPCs können auf <strong>Expeditionen</strong> mitgenommen werden</li>
+<li>Als Wachen eingesetzt machen sie Angriffe schwerer abzuwehren</li>
+<li>Vor großen Angriffen: gutes Essen kochen → alle bekommen Buffs → bessere Verteidigung</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">💞 Beziehungen</div><div class="sub-card-body"><ul>
+<li>NPCs entwickeln untereinander <strong>Freundschaften oder Konflikte</strong></li>
+<li>Spieler kann durch Charisma vermitteln</li>
+<li>Gute Beziehungen → steigern Gesamtproduktivität</li>
+<li>Konflikte können die Basis destabilisieren</li>
+</ul></div></div>
+<div class="sub-card" style="border-color:rgba(200,68,26,0.3);"><div class="sub-card-title" style="color:#c8441a;">🔄 Der Kreislauf</div><div class="sub-card-body">
+<p style="font-size:13px;line-height:1.8;margin:0;">Farm produziert Zutaten → Koch-NPC kocht gutes Essen → alle NPCs gut gelaunt &amp; produktiv → Handwerks-NPCs bauen besser → Basis wird stärker → bessere Verteidigung gegen Aliens → mehr Zeit zum Farmen und Kochen.</p>
+<p style="font-size:12px;color:#999;margin-top:8px;">Wer diesen Kreislauf am Laufen hält hat einen massiven Vorteil.</p>
+</div></div>
 </div>`},
   { id:'schwierigkeit', num:'11', icon:'⚖️', title:'Schwierigkeitsgrad', img:'https://images.unsplash.com/photo-1509803874385-db7c23652552?w=800&q=60',
     content:`<div class="diff-row"><div class="diff-box"><div class="diff-box-title easy">Easy</div><div class="diff-box-sub">Berika (fiktiv ~ USA)</div><ul><li>Viele Waffen überall</li><li>Kleines Startfahrzeug</li><li>Leiche 1h geschützt</li><li>Freunde können Leiche looten</li></ul></div><div class="diff-box"><div class="diff-box-title medium">Mittel</div><div class="diff-box-sub">Fiktive europ. Stadt (TBD)</div><ul><li>Schusswaffen selten</li><li>Nahkampfwaffen öfter als Hard</li><li>Lastenfahrrad zum Start</li><li>Leiche 30 Min. geschützt</li></ul></div><div class="diff-box"><div class="diff-box-title hard">Hard</div><div class="diff-box-sub">Fiktive europ. Stadt (TBD)</div><ul><li>Kaum Waffen zu finden</li><li>Waffen nur bei Gegnern/Militär</li><li>Leiche sofort lootbar</li><li>Kein Startfahrzeug</li></ul></div></div><p class="note">Rauf wechseln: nur was man am Körper trägt + eine Nahkampfwaffe · Runter wechseln: alles mitnehmen</p>`},
   { id:'kampf', num:'12', icon:'💥', title:'Kampf & PvP', img:'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=60',
-    content:`<div class="sub-grid"><div class="sub-card"><div class="sub-card-title">PvE — Gegner</div><div class="sub-card-body">Schüsse locken Gegner an — lautlose Waffen oder Nahkampf sind manchmal cleverer. Alien-Angriffe auf die Basis skalieren mit dem Durchschnittslevel der Bewohner und der Anzahl der anwesenden Spieler — werden also immer stärker. Ein Turm in der Basis ermöglicht es, Angriffe 2–3 Tage im Voraus zu erkennen und sich vorzubereiten.</div></div><div class="sub-card"><div class="sub-card-title">PvP — Einstellungen</div><div class="sub-card-body">PvP kann manuell ein- und ausgeschaltet werden. Bei der Erkundung trifft man nur auf Spieler die ebenfalls PvP aktiviert haben. Der PvP-Modus kann jederzeit in der Basis gewechselt werden — außer bei laufenden Angriffen. Bei Erkundung gilt die Umstellung erst ab der nächsten Zone.</div></div><div class="sub-card"><div class="sub-card-title">PvP — Basis angreifen</div><div class="sub-card-body">Wenn man eine andere Basis angreift, wird die eigene Basis automatisch für PvP freigegeben. Spieler können ihre Basis aber auch manuell für PvP freigeben wenn sie einen Angriff provozieren wollen.</div></div></div>`},
+    content:`<div class="sub-grid">
+<div class="sub-card"><div class="sub-card-title">🎮 PvE — Gegner</div><div class="sub-card-body"><ul>
+<li>Schüsse <strong>locken Gegner an</strong> — lautlose Waffen oder Nahkampf manchmal klüger</li>
+<li>Alien-Angriffe skalieren mit <strong>Durchschnittslevel der Bewohner</strong> und Spielerzahl</li>
+<li>Angriffe werden mit der Zeit immer stärker — keine Stagnation</li>
+<li>Turm in der Basis: <strong>2–3 Tage Vorwarnung</strong> vor Angriffen</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🔘 PvP — Einstellungen</div><div class="sub-card-body"><ul>
+<li>PvP kann <strong>manuell ein- und ausgeschaltet</strong> werden</li>
+<li>Bei Erkundung: trifft man nur Spieler die PvP ebenfalls aktiviert haben</li>
+<li>Wechsel in der Basis jederzeit möglich — außer bei laufenden Angriffen</li>
+<li>Bei Erkundung: Wechsel gilt erst ab der <strong>nächsten Zone</strong></li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🏰 PvP — Basis angreifen</div><div class="sub-card-body"><ul>
+<li>Wer eine andere Basis angreift → eigene Basis wird <strong>automatisch für PvP freigegeben</strong></li>
+<li>Spieler können eigene Basis auch manuell freigeben um einen Angriff zu provozieren</li>
+<li>Riskante Strategie — doppeltes Risiko für beide Seiten</li>
+</ul></div></div>
+</div>`},
   { id:'handy', num:'13', icon:'📱', title:'In-Game Handy', img:'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=60',
     content:`<p>Satelliten von Aliens zerstört — kein Internet, GPS oder Telefon. Nur Offline-Apps verfügbar.</p><div class="pills" style="margin-top:10px"><span class="pill">Uhrzeit/Datum</span><span class="pill">Wecker</span><span class="pill">Kalender</span><span class="pill">Notizen</span><span class="pill">Maps</span><span class="pill">Kompass</span><span class="pill">Kamera</span><span class="pill">WIKI (Alien-Aktivitäten)</span></div>`},
   { id:'handel', num:'14', icon:'🤝', title:'Handelssystem', img:'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=60',
-    content:`<p style='font-size:13px;color:#888;line-height:1.7;margin-bottom:12px;'>Es gibt keine Währung im Spiel. Alles basiert auf Tausch — der Wert eines Gegenstands entsteht durch Angebot und Nachfrage. Wer gut tauscht und den Wert von Dingen einschätzen kann hat einen klaren Vorteil.</p><div class="sub-grid"><div class="sub-card"><div class="sub-card-title">Handelsautomat — Langsam</div><div class="sub-card-body">Gegenstand zum fairen Marktwert anbieten. Es dauert eine Weile bis ein anderer Spieler das Angebot annimmt — aber man bekommt den vollen Gegenwert. Die beste Option wenn man Zeit hat.</div></div><div class="sub-card"><div class="sub-card-title">Handelsautomat — Schnell</div><div class="sub-card-body">Sofortiger Tausch zum halben Marktwert. Wer schnell etwas braucht zahlt dafür einen Preis. In Notfällen unverzichtbar — aber auf Dauer teuer.</div></div><div class="sub-card"><div class="sub-card-title">Handel-NPCs</div><div class="sub-card-body">Händler-NPCs besuchen die Basis ab und zu und bringen eigene Waren mit. Gute Quelle für seltene Gegenstände. Auch Handel unter Spielergemeinschaften direkt möglich.</div></div><div class="sub-card"><div class="sub-card-title">USB-Sticks</div><div class="sub-card-body">Rolle noch in Entwicklung. Mögliche Nutzung für digitale Daten, Karten oder Dokumente — aber nicht für Musik da kein passendes Abspielgerät verfügbar ist.</div></div></div>`},
+    content:`<p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:14px;">Keine Währung. Alles basiert auf Tausch — der Wert eines Gegenstands entsteht durch Angebot und Nachfrage. Wer gut tauscht hat einen klaren Vorteil.</p>
+<div class="sub-grid">
+<div class="sub-card"><div class="sub-card-title">🐢 Handelsautomat — Langsam</div><div class="sub-card-body"><ul>
+<li>Gegenstand zum <strong>fairen Marktwert</strong> anbieten</li>
+<li>Dauert bis ein anderer Spieler das Angebot annimmt</li>
+<li>Man bekommt den <strong>vollen Gegenwert</strong></li>
+<li>Beste Option wenn man Zeit hat</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">⚡ Handelsautomat — Schnell</div><div class="sub-card-body"><ul>
+<li>Sofortiger Tausch zum <strong>halben Marktwert</strong></li>
+<li>In Notfällen unverzichtbar</li>
+<li>Auf Dauer teuer — nur wenn es schnell gehen muss</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🧳 Händler-NPCs</div><div class="sub-card-body"><ul>
+<li>Besuchen die Basis ab und zu mit eigenen Waren</li>
+<li>Gute Quelle für <strong>seltene Gegenstände</strong></li>
+<li>Direkter Handel zwischen Spielergemeinschaften ebenfalls möglich</li>
+<li>Händler-NPCs bringen auch Neuigkeiten von draußen</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">💾 USB-Sticks</div><div class="sub-card-body"><ul>
+<li>Rolle noch in Entwicklung</li>
+<li>Mögliche Nutzung: digitale Daten, Karten, Dokumente</li>
+<li>Nicht für Musik — kein passendes Abspielgerät verfügbar</li>
+</ul></div></div>
+</div>`},
   { id:'namen', num:'15', icon:'🌍', title:'Fiktive Orts- & Ländernamen', img:'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&q=60',
     content:`<table class="city-tbl"><tr><th>Echt (nicht verwenden)</th><th>Fiktiv</th></tr><tr><td>USA / Amerika</td><td>Berika / USB</td></tr><tr><td>Europa</td><td>Euronia</td></tr><tr><td>Deutschland</td><td>Germalia</td></tr><tr><td>England / UK</td><td>Britmark / Engmark</td></tr><tr><td>Frankreich</td><td>Frankalia</td></tr><tr><td>Russland</td><td>Ruskov</td></tr></table><p class="note">Alle Teams, Bands, Verlage ebenfalls fiktiv. Ggf. echte Kooperationen später möglich.</p>`},
   { id:'collectibles', num:'16', icon:'🏆', title:'Collectibles & Achievements', img:'https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=800&q=60',
-    content:`<div class="sub-grid"><div class="sub-card"><div class="sub-card-title">Comics</div><div class="sub-card-body">Erstmal nur Cover. Später: gezeichnete Panels. Kooperation mit Indie-Künstlern möglich.</div></div><div class="sub-card"><div class="sub-card-title">Schallplatten</div><div class="sub-card-body">Abspielbar mit Plattenspieler in der Basis. Stimmungsboost. Kooperation mit Bands möglich.</div></div><div class="sub-card"><div class="sub-card-title">Trading Cards</div><div class="sub-card-body">Einfaches Sammelkartensystem. Simples Artwork. Reine Sammel- und Handelsobjekte.</div></div><div class="sub-card"><div class="sub-card-title">Trikots & Sportmemorabilien</div><div class="sub-card-body">Fiktive Teams und Ligen. Statussymbol. Schneider kann Repliken machen.</div></div><div class="sub-card"><div class="sub-card-title">Spielzeug & Figuren</div><div class="sub-card-body">Fiktive Actionfiguren aus Vor-Invasions-Popkultur. Ironischer Bezug zu Aliens.</div></div><div class="sub-card"><div class="sub-card-title">Fotos & Dokumente</div><div class="sub-card-body">Tagebücher, Familienfotos, Postkarten — Storyelemente</div></div><div class="sub-card"><div class="sub-card-title">Luxusgüter & Kuriositäten</div><div class="sub-card-body">Whiskey, Wein, Uhren, Alien-Artefakte mit unbekannter Funktion</div></div><div class="sub-card"><div class="sub-card-title">Condition-Rating (1–10)</div><div class="sub-card-body">Grober Bereich bei wenig Skill, exakt mit Collector-Skill. Optische Schäden sichtbar.</div></div></div>`},
+    content:`<div class="sub-grid">
+<div class="sub-card"><div class="sub-card-title">📚 Comics</div><div class="sub-card-body"><ul>
+<li>Zunächst nur <strong>Cover</strong> — kein Vollinhalt</li>
+<li>Später: handgezeichnete Panel-Geschichten geplant</li>
+<li>Kooperation mit Indie-Künstlern möglich</li>
+<li>Sammel- und Handelsobjekt mit Stimmungswert</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🎵 Schallplatten</div><div class="sub-card-body"><ul>
+<li>Abspielbar mit <strong>Plattenspieler in der Basis</strong></li>
+<li>Musik gibt <strong>Stimmungsboost</strong> für alle Bewohner</li>
+<li>Digitale Musik größtenteils verloren — Platten sind die primäre Musikquelle</li>
+<li>Kooperation mit echten Indie-Bands als DLC möglich</li>
+<li>Alien-Störsignale können Wiedergabe unterbrechen</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🃏 Trading Cards</div><div class="sub-card-body"><ul>
+<li>Einfaches Sammelkartensystem, simples Artwork</li>
+<li>Reine Sammel- und Handelsobjekte — keine Spielmechanik</li>
+<li>Wert durch Seltenheit und Zustand</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">👕 Trikots & Sportmemorabilien</div><div class="sub-card-body"><ul>
+<li>Fiktive Teams und Ligen (keine echten Lizenzen nötig)</li>
+<li>Hoher Wert als <strong>Statussymbol</strong></li>
+<li>Schneider kann Repliken herstellen — mit <strong>geringerem Handelswert</strong> als Originale</li>
+<li>Wert abhängig von Condition-Rating und Teambeliebtheit</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🧸 Spielzeug & Figuren</div><div class="sub-card-body"><ul>
+<li>Fiktive Actionfiguren aus der Vor-Invasions-Popkultur</li>
+<li>Ironischer Bezug: Alien-Figuren die vor der Invasion als Spielzeug verkauft wurden</li>
+<li>Kurioser Sammelgegenstand mit Schmunzel-Faktor</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">📷 Fotos & Dokumente</div><div class="sub-card-body"><ul>
+<li>Tagebücher, Familienfotos, Postkarten</li>
+<li>Primär <strong>Story-Elemente</strong> — geben Einblick in die Welt vor der Invasion</li>
+<li>Kein direkter Handelswert, aber wichtig für Lore-Sammler</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">💎 Luxusgüter & Kuriositäten</div><div class="sub-card-body"><ul>
+<li>🥃 Whiskey, Wein — Stimmungsboost, hoher Tauschwert</li>
+<li>⌚ Uhren — Statussymbol, kein praktischer Nutzen</li>
+<li>👽 Alien-Artefakte — unbekannte Funktion, möglicherweise mit dem Mantel-Element verbunden</li>
+</ul></div></div>
+<div class="sub-card" style="border-color:rgba(200,68,26,0.3);"><div class="sub-card-title" style="color:#c8441a;">⭐ Condition-Rating (1–10)</div><div class="sub-card-body"><ul>
+<li>Bestimmt den <strong>Handelswert</strong> jedes Sammelstücks</li>
+<li>Niedriger Collector-Skill: nur grober Bereich sichtbar (z.B. „2–5")</li>
+<li>Hoher Collector-Skill: <strong>exakter Wert</strong> erkennbar</li>
+<li>Optische Schäden sichtbar: kaputte Ecken, ausgeblichene Farben, Risse</li>
+<li>Schäden beeinflussen den Wert direkt und sichtbar</li>
+</ul></div></div>
+</div>`},
   { id:'weltbedrohung', num:'17', icon:'🚨', title:'Weltbedrohung spürbar halten', img:'https://images.unsplash.com/photo-1580136579312-94651dfd596d?w=800&q=60',
-    content:`<p style='font-size:13px;color:#888;line-height:1.7;margin-bottom:12px;'>Eine der wichtigsten Design-Entscheidungen: Der Spieler darf nie vergessen dass da draußen ein gefährlicher Gegner ist — egal wie gemütlich die Basis gerade ist. Die Bedrohung muss immer spürbar bleiben.</p><div class="sub-grid"><div class="sub-card"><div class="sub-card-title">Passive Erinnerungen</div><div class="sub-card-body">Alien-Drohnen fliegen gelegentlich über die Basis — sichtbar am Himmel. Ferne Explosionen und Geräusche aus anderen Gebieten. Der Plattenspieler wird manchmal durch Alien-Störsignale unterbrochen. NPCs in der Basis kommentieren was draußen passiert.</div></div><div class="sub-card"><div class="sub-card-title">Aktive Mechaniken</div><div class="sub-card-body">Regelmäßige Alien-Angriffe die mit Spielerfortschritt stärker werden. Der Turm erkennt Angriffe 2–3 Tage im Voraus — Zeit zur Vorbereitung. Gebiete die man nicht besucht werden zurückerobert. Ressourcen werden knapper wenn man zu lange nicht erkundet.</div></div><div class="sub-card"><div class="sub-card-title">Informationen & Neuigkeiten</div><div class="sub-card-body">Das Handy-WIKI aktualisiert sich mit Berichten über Alien-Aktivitäten in anderen Gebieten. Händler-NPCs bringen Neuigkeiten von draußen — manchmal gute, manchmal schlechte. Man kann eine Stunde Trikots tauschen und Platten hören — aber man kann es sich nicht leisten das zu vergessen.</div></div><div class="sub-card" style='border-color:rgba(200,68,26,0.3);'><div class="sub-card-title" style='color:#c8441a;'>Die Abbauanlagen</div><div class="sub-card-body">Die Aliens sind wegen einem unbekannten Element tief im Erdmantel auf die Erde gekommen — für Menschen völlig unentdeckt und undetektierbar. Die stationären Abbauanlagen sind das eigentliche Ziel: Riesige Bohroperationen die tief in den Erdboden reichen. Sie zu zerstören ist das ultimative Ziel im Endgame.</div></div></div>`}
+    content:`<p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:14px;">Eine der wichtigsten Design-Entscheidungen: Der Spieler darf nie vergessen dass da draußen ein gefährlicher Gegner ist — egal wie gemütlich die Basis gerade wirkt.</p>
+<div class="sub-grid">
+<div class="sub-card"><div class="sub-card-title">🌫️ Passive Erinnerungen</div><div class="sub-card-body"><ul>
+<li>Alien-Drohnen fliegen gelegentlich über die Basis — am Himmel sichtbar</li>
+<li>Ferne Explosionen und Geräusche aus anderen Gebieten hörbar</li>
+<li>Der Plattenspieler wird manchmal durch <strong>Alien-Störsignale unterbrochen</strong></li>
+<li>NPCs kommentieren was draußen passiert — manchmal beunruhigend</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">⚡ Aktive Mechaniken</div><div class="sub-card-body"><ul>
+<li>Alien-Angriffe werden mit <strong>Spielerfortschritt stärker</strong> — keine Sicherheitszone</li>
+<li>Turm erkennt Angriffe <strong>2–3 Tage im Voraus</strong> — Zeit zur Vorbereitung</li>
+<li>Nicht besuchte Gebiete werden <strong>von Aliens zurückerobert</strong></li>
+<li>Ressourcen werden knapper je länger man nicht erkundet</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">📡 Informationen & Neuigkeiten</div><div class="sub-card-body"><ul>
+<li>Handy-WIKI aktualisiert sich mit Berichten über Alien-Aktivitäten</li>
+<li>Händler-NPCs bringen Neuigkeiten von draußen — manchmal gut, manchmal schlecht</li>
+<li>Man kann eine Stunde Trikots tauschen und Platten hören — aber man kann es sich nicht leisten das zu vergessen</li>
+</ul></div></div>
+<div class="sub-card" style="border-color:rgba(200,68,26,0.3);"><div class="sub-card-title" style="color:#c8441a;">⛏️ Die Abbauanlagen — das wahre Ziel</div><div class="sub-card-body"><ul>
+<li>Aliens kamen wegen einem <strong>unbekannten Element tief im Erdmantel</strong></li>
+<li>Für Menschen völlig unentdeckt und undetektierbar</li>
+<li>Stationäre Abbauanlagen: riesige Bohroperationen die tief in den Boden reichen</li>
+<li>Sie zu zerstören ist das <strong>ultimative Ziel im Endgame</strong></li>
+<li>Was passiert wenn alle Anlagen zerstört sind? — Noch in Entwicklung</li>
+</ul></div></div>
+</div>`}
 ];
 
 // BUILD
