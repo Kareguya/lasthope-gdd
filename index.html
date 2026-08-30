@@ -488,7 +488,9 @@ const sections = [
 <li>Gebäude: Wände (inkl. Fenster, Türen), Böden, Flach-/Schrägdächer, Treppen, Leitern</li>
 <li>Zäune zur Abgrenzung des Geländes</li>
 <li>Verteidigung: Spikefallen, Panzersperren, Elektrozäune, Geschütztürme, Flammenwerfer, Minen</li>
-<li>Strom: Windräder, Wasserräder, Solaranlage, E-Auto-Akkus, Generatoren (laut!)</li>
+<li>Strom: Windräder, Wasserräder, E-Auto-Akkus, Generatoren (laut!)</li>
+<li>☀️ <strong>Kleine Solaranlage</strong> (faltbar) — nur findbar, solo tragbar, lädt nur das Handy</li>
+<li>☀️ <strong>Große Solaranlage</strong> (Hausdach) — nur findbar, nur mit Fahrzeug transportierbar, versorgt die ganze Basis — seltener aber wertvoller Fund</li>
 </ul></div></div>
 <div class="sub-card"><div class="sub-card-title">🤖 Maschinenbau — Drohnen</div><div class="sub-card-body"><ul>
 <li>🔍 <strong>Aufklärungsdrohne</strong> — erkundet und markiert Gegner für ~3 Sek.</li>
@@ -578,6 +580,26 @@ const sections = [
 <li>🧊 <strong>Kühlschrank / Herd</strong> — nur per Fahrzeug transportierbar, sehr schwer</li>
 <li>🛢️ <strong>Kraftstoff</strong> — nur an Tankstellen und verlassenen Fahrzeugen</li>
 </ul></div></div>
+
+<div class="sub-card" style="grid-column:1/-1;"><div class="sub-card-title">🔍 Loot-System — Durchsuchen</div><div class="sub-card-body">
+<p style="font-size:12px;color:#999;margin-bottom:12px;">Kein lästiges Taste-Gedrückt-Halten. Das Lootfenster öffnet sich sofort — aber der Inhalt wird je nach Container realistisch nach und nach aufgedeckt.</p>
+<table style="width:100%;border-collapse:collapse;font-size:13px;">
+<tr style="border-bottom:1px solid rgba(255,107,43,0.4);"><th style="padding:7px 10px;text-align:left;color:#ff6b2b;">Container</th><th style="padding:7px 10px;text-align:left;color:#ff6b2b;">Öffnung</th><th style="padding:7px 10px;text-align:left;color:#ff6b2b;">Loot-Anzeige</th><th style="padding:7px 10px;text-align:left;color:#ff6b2b;">Grund</th></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:7px 10px;">🗄️ Schrank / Schublade</td><td style="padding:7px 10px;">Sofort</td><td style="padding:7px 10px;">Schnell, eines nach dem anderen</td><td style="padding:7px 10px;color:#999;">Überschaubarer Raum, alles gut sichtbar</td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:7px 10px;">📦 Kiste / Tasche</td><td style="padding:7px 10px;">Sofort</td><td style="padding:7px 10px;">Mit ~1 Sek. Pause zwischen Items</td><td style="padding:7px 10px;color:#999;">Sachen liegen aufeinander — muss durchwühlt werden</td></tr>
+<tr><td style="padding:7px 10px;">💀 Leiche</td><td style="padding:7px 10px;">Sofort</td><td style="padding:7px 10px;">Langsam, mit Pausen</td><td style="padding:7px 10px;color:#999;">Mehrere Taschen die einzeln durchsucht werden</td></tr>
+</table>
+<p style="font-size:12px;color:#999;margin-top:10px;">Das Durchsuchen fühlt sich realistisch unterschiedlich an — ohne künstliche Wartezeiten durch Tastenhalten.</p>
+<p style="font-size:12px;color:#ff6b2b;margin-top:14px;margin-bottom:8px;font-weight:600;">Farblicher Rahmen — Nützlichkeit auf einen Blick</p>
+<table style="width:100%;border-collapse:collapse;font-size:13px;">
+<tr style="border-bottom:1px solid rgba(255,107,43,0.4);"><th style="padding:7px 10px;text-align:left;color:#ff6b2b;">Rahmen</th><th style="padding:7px 10px;text-align:left;color:#ff6b2b;">Bedeutung</th><th style="padding:7px 10px;text-align:left;color:#ff6b2b;">Beispiele</th></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:7px 10px;"><span style="display:inline-block;padding:2px 10px;border:2px solid #888;border-radius:4px;color:#aaa;">Grau</span></td><td style="padding:7px 10px;">Nur zum Zerlegen / als Material</td><td style="padding:7px 10px;color:#999;">Schrott, kaputte Teile, wertlose Reste</td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:7px 10px;"><span style="display:inline-block;padding:2px 10px;border:2px solid #4caf50;border-radius:4px;color:#4caf50;">Grün</span></td><td style="padding:7px 10px;">Direkt nutzbar</td><td style="padding:7px 10px;color:#999;">Waffen, Essen, Werkzeug, Kleidung</td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:7px 10px;"><span style="display:inline-block;padding:2px 10px;border:2px solid #888;border-radius:4px;background:linear-gradient(90deg,#4caf5033 50%,#88888833 50%);color:#ccc;">Grün / Grau</span></td><td style="padding:7px 10px;">Nutzbar <em>und</em> zerlegbar</td><td style="padding:7px 10px;color:#999;">Intaktes Werkzeug das man einschmelzen könnte</td></tr>
+<tr><td style="padding:7px 10px;"><span style="display:inline-block;padding:2px 10px;border:2px solid #ff6b2b;border-radius:4px;color:#ff6b2b;">Orange</span></td><td style="padding:7px 10px;">Collectible</td><td style="padding:7px 10px;color:#999;">Comics, Schallplatten, Trikots, Figuren</td></tr>
+</table>
+<p style="font-size:12px;color:#555;margin-top:12px;font-style:italic;">💡 Offene Idee: Rahmen könnte zusätzlich den Zustand des Items widerspiegeln — noch in Diskussion.</p>
+</div></div>
 </div>`},
   { id:'farmkochen', num:'10', icon:'🌾', title:'Farm, Kochen & Schneider', img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=60',
     content:`<div class="sub-grid">
@@ -636,6 +658,25 @@ const sections = [
 <li>Je mehr Gruppen kombiniert → desto aufwendiger → desto stärker alle Buffs</li>
 <li>Kombinations-Gerichte brauchen einen richtigen Herd und mehr Zeit</li>
 </ul><p style="margin-top:8px;font-size:12px;color:#999;">Kein "optimales" Gericht das alles andere übertrifft — der Aufwand entscheidet, nicht die Zutat.</p></div></div>
+
+<div class="sub-card" style="grid-column:1/-1;"><div class="sub-card-title">💧 Trinken & Durst</div><div class="sub-card-body">
+<p style="font-size:12px;color:#999;margin-bottom:12px;">Trinken stillt den Durst — aber nicht alle Getränke gleich gut. Drei klare Kategorien mit je eigenem Zweck.</p>
+<table style="width:100%;border-collapse:collapse;font-size:13px;">
+<tr style="border-bottom:1px solid rgba(255,107,43,0.4);"><th style="padding:7px 10px;text-align:left;color:#ff6b2b;">Getränk</th><th style="padding:7px 10px;text-align:left;color:#ff6b2b;">Durst</th><th style="padding:7px 10px;text-align:left;color:#ff6b2b;">Effekt</th></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:7px 10px;">💧 Wasser</td><td style="padding:7px 10px;">Stillt am besten</td><td style="padding:7px 10px;color:#999;">Kein Bonus, kein Malus — einfach optimal</td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:7px 10px;">🥤 Zuckergetränke</td><td style="padding:7px 10px;">Stillt weniger als Wasser</td><td style="padding:7px 10px;color:#999;">Gibt Energie-Boost — kurzzeitig mehr Ausdauer</td></tr>
+<tr><td style="padding:7px 10px;">🍺 Alkohol</td><td style="padding:7px 10px;">Stillt kaum</td><td style="padding:7px 10px;color:#999;">Hebt Stimmung (Spieler + NPCs) — ist aber Gift: Gesundheit sinkt, Koordination leidet</td></tr>
+</table>
+<p style="font-size:12px;color:#ff6b2b;margin-top:14px;margin-bottom:8px;font-weight:600;">💧 Wasser als Ressource</p>
+<ul>
+<li>Wasser ist <strong>nicht einfach überall verfügbar</strong> — muss aktiv gesammelt werden</li>
+<li>🌧️ <strong>Regenwasser</strong> sammeln — einfachste Methode, abhängig vom Wetter</li>
+<li>🏞️ <strong>Flüsse und Seen</strong> als Quellen — aber verschmutztes Wasser macht krank</li>
+<li>⚠️ Rohes Wasser aus der Natur muss <strong>abgekocht oder gefiltert</strong> werden</li>
+<li>Mit höherem Handwerk-Skill: Wasserfilter und Sammelbehälter baubar</li>
+<li>Wasser für die ganze Basis sicherzustellen ist eine dauerhafte Aufgabe</li>
+</ul>
+</div></div>
 
 <div class="sub-card"><div class="sub-card-title">🧊 Kochen — Verderb & Lagerung</div><div class="sub-card-body"><ul>
 <li>Frische Zutaten verderben nach einer gewissen Zeit</li>
@@ -740,17 +781,43 @@ const sections = [
 </ul></div></div>
 </div>`},
   { id:'handy', num:'13', icon:'📱', title:'In-Game Handy', img:'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=60',
-    content:`<p>Satelliten von Aliens zerstört — kein Internet, GPS oder Telefon. Nur Offline-Apps verfügbar.</p><div class="pills" style="margin-top:10px"><span class="pill">Uhrzeit/Datum</span><span class="pill">Wecker</span><span class="pill">Kalender</span><span class="pill">Notizen</span><span class="pill">Maps</span><span class="pill">Kompass</span><span class="pill">Kamera</span><span class="pill">WIKI (Alien-Aktivitäten)</span></div>`},
-  { id:'handel', num:'14', icon:'🤝', title:'Handelssystem', img:'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=60',
-    content:`<p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:14px;">Keine Währung. Alles basiert auf Tausch — der Wert eines Gegenstands entsteht durch Angebot und Nachfrage. Wer gut tauscht hat einen klaren Vorteil.</p>
+    content:`<p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:14px;">Satelliten wurden zerstört — kein Internet, kein GPS, kein Mobilfunk. Das Handy läuft nur mit lokalen Offline-Apps. Aber es ist trotzdem eines der wichtigsten Werkzeuge im Spiel.</p>
 <div class="sub-grid">
-<div class="sub-card"><div class="sub-card-title">🐢 Handelsautomat — Langsam</div><div class="sub-card-body"><ul>
+<div class="sub-card"><div class="sub-card-title">📱 Offline-Apps</div><div class="sub-card-body"><ul>
+<li>🕐 Uhr, Wecker, Kalender, Notizen</li>
+<li>🗺️ Offline-Karten &amp; Kompass</li>
+<li>📷 Kamera</li>
+<li>📖 WIKI — aktualisiert sich mit Alien-Aktivitäten in der Umgebung</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🎵 Musik-Progression</div><div class="sub-card-body"><ul>
+<li>🎵 <strong>Schallplatten</strong> — früh im Spiel, nur in der Basis am Plattenspieler hörbar, gibt Stimmungsboost für alle Bewohner</li>
+<li>💾 <strong>USB-Sticks</strong> — beim Looten findbar, enthalten Musikdateien — man weiß nie was drauf ist bis man sie abspielt</li>
+<li>📱 <strong>Handy</strong> — später im Spiel findet man eine Möglichkeit Musik vom USB-Stick aufs Handy zu übertragen</li>
+<li>🎧 Musik auf dem Handy gibt einen <strong>Stimmungsboost unterwegs</strong> — kleiner aber dauerhafter Buff beim Erkunden</li>
+</ul></div></div>
+<div class="sub-card"><div class="sub-card-title">🔋 Akku & Aufladen</div><div class="sub-card-body"><ul>
+<li>Akku-Stand immer sichtbar auf dem Display</li>
+<li>Warnung wenn Akku unter kritischen Stand fällt</li>
+<li>Leer = kein WIKI, keine Karte, keine Musik — gefährlich in der Wildnis</li>
+</ul>
+<p style="font-size:12px;color:#ff6b2b;margin-top:10px;margin-bottom:6px;font-weight:600;">Lade-Progression</p>
+<ul>
+<li>🔧 <strong>Mechanisches Ladegerät</strong> — Early Game: Taste spammen um Strom zu erzeugen, mühsam aber immer verfügbar</li>
+<li>☀️ <strong>Kleine Solaranlage</strong> (faltbar) — solo tragbar, lädt nur das Handy, häufiger zu finden</li>
+<li>⚡ <strong>Induktions-Ladegerät</strong> — seltener Fund: Handy lädt automatisch sobald man das Lager betritt</li>
+</ul></div></div>
+</div>`
+
+  { id:'handel', num:'14', icon:'🤝', title:'Handelssystem', img:'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=60',
+    content:`<p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:14px;">Keine Währung. Alles basiert auf Tausch — der Wert eines Gegenstands entsteht durch Angebot und Nachfrage.</p>
+<div class="sub-grid">
+<div class="sub-card"><div class="sub-card-title">🐢 Langsamer Tausch</div><div class="sub-card-body"><ul>
 <li>Gegenstand zum <strong>fairen Marktwert</strong> anbieten</li>
 <li>Dauert bis ein anderer Spieler das Angebot annimmt</li>
 <li>Man bekommt den <strong>vollen Gegenwert</strong></li>
 <li>Beste Option wenn man Zeit hat</li>
 </ul></div></div>
-<div class="sub-card"><div class="sub-card-title">⚡ Handelsautomat — Schnell</div><div class="sub-card-body"><ul>
+<div class="sub-card"><div class="sub-card-title">⚡ Schneller Tausch</div><div class="sub-card-body"><ul>
 <li>Sofortiger Tausch zum <strong>halben Marktwert</strong></li>
 <li>In Notfällen unverzichtbar</li>
 <li>Auf Dauer teuer — nur wenn es schnell gehen muss</li>
@@ -758,92 +825,89 @@ const sections = [
 <div class="sub-card"><div class="sub-card-title">🧳 Händler-NPCs</div><div class="sub-card-body"><ul>
 <li>Besuchen die Basis ab und zu mit eigenen Waren</li>
 <li>Gute Quelle für <strong>seltene Gegenstände</strong></li>
-<li>Direkter Handel zwischen Spielergemeinschaften ebenfalls möglich</li>
-<li>Händler-NPCs bringen auch Neuigkeiten von draußen</li>
+<li>Bringen Neuigkeiten von draußen</li>
 </ul></div></div>
 <div class="sub-card"><div class="sub-card-title">💾 USB-Sticks</div><div class="sub-card-body"><ul>
-<li>Rolle noch in Entwicklung</li>
-<li>Mögliche Nutzung: digitale Daten, Karten, Dokumente</li>
-<li>Nicht für Musik — kein passendes Abspielgerät verfügbar</li>
+<li>Beim Looten findbar — enthalten <strong>Musikdateien</strong></li>
+<li>Man weiß nie was drauf ist bis man den Stick abspielt</li>
+<li>Später: Musik vom Stick aufs Handy übertragen möglich</li>
+<li>Seltener Fund: ein Stick mit kompletter Album-Sammlung ist wertvoll</li>
 </ul></div></div>
 </div>`},
   { id:'namen', num:'15', icon:'🌍', title:'Fiktive Orts- & Ländernamen', img:'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&q=60',
-    content:`<table class="city-tbl"><tr><th>Echt (nicht verwenden)</th><th>Fiktiv</th></tr><tr><td>USA / Amerika</td><td>Berika / USB</td></tr><tr><td>Europa</td><td>Euronia</td></tr><tr><td>Deutschland</td><td>Germalia</td></tr><tr><td>England / UK</td><td>Britmark / Engmark</td></tr><tr><td>Frankreich</td><td>Frankalia</td></tr><tr><td>Russland</td><td>Ruskov</td></tr></table><p class="note">Alle Teams, Bands, Verlage ebenfalls fiktiv. Ggf. echte Kooperationen später möglich.</p>`},
+    content:`<table class="city-tbl"><tr><th>Echt (nicht verwenden)</th><th>Fiktiv</th></tr>
+<tr><td>USA / Amerika</td><td>Berika / USB</td></tr>
+<tr><td>Europa</td><td>Euronia</td></tr>
+<tr><td>Deutschland</td><td>Germalia</td></tr>
+<tr><td>England / UK</td><td>Britmark / Engmark</td></tr>
+<tr><td>Frankreich</td><td>Frankalia</td></tr>
+<tr><td>Russland</td><td>Ruskov</td></tr></table>
+<p class="note">Alle Teams, Bands, Verlage ebenfalls fiktiv. Ggf. echte Kooperationen später möglich.</p>`},
   { id:'collectibles', num:'16', icon:'🏆', title:'Collectibles & Achievements', img:'https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=800&q=60',
     content:`<div class="sub-grid">
 <div class="sub-card"><div class="sub-card-title">📚 Comics</div><div class="sub-card-body"><ul>
 <li>Zunächst nur <strong>Cover</strong> — kein Vollinhalt</li>
 <li>Später: handgezeichnete Panel-Geschichten geplant</li>
 <li>Kooperation mit Indie-Künstlern möglich</li>
-<li>Sammel- und Handelsobjekt mit Stimmungswert</li>
 </ul></div></div>
 <div class="sub-card"><div class="sub-card-title">🎵 Schallplatten</div><div class="sub-card-body"><ul>
 <li>Abspielbar mit <strong>Plattenspieler in der Basis</strong></li>
-<li>Musik gibt <strong>Stimmungsboost</strong> für alle Bewohner</li>
-<li>Digitale Musik größtenteils verloren — Platten sind die primäre Musikquelle</li>
-<li>Kooperation mit echten Indie-Bands als DLC möglich</li>
+<li>Stimmungsboost für alle Bewohner</li>
+<li>Digitale Musik größtenteils verloren — Platten sind die primäre Quelle</li>
 <li>Alien-Störsignale können Wiedergabe unterbrechen</li>
 </ul></div></div>
 <div class="sub-card"><div class="sub-card-title">🃏 Trading Cards</div><div class="sub-card-body"><ul>
 <li>Einfaches Sammelkartensystem, simples Artwork</li>
 <li>Reine Sammel- und Handelsobjekte — keine Spielmechanik</li>
-<li>Wert durch Seltenheit und Zustand</li>
 </ul></div></div>
 <div class="sub-card"><div class="sub-card-title">👕 Trikots & Sportmemorabilien</div><div class="sub-card-body"><ul>
-<li>Fiktive Teams und Ligen (keine echten Lizenzen nötig)</li>
+<li>Fiktive Teams und Ligen</li>
 <li>Hoher Wert als <strong>Statussymbol</strong></li>
-<li>Schneider kann Repliken herstellen — mit <strong>geringerem Handelswert</strong> als Originale</li>
-<li>Wert abhängig von Condition-Rating und Teambeliebtheit</li>
+<li>Schneider kann Repliken herstellen — mit geringerem Handelswert</li>
 </ul></div></div>
 <div class="sub-card"><div class="sub-card-title">🧸 Spielzeug & Figuren</div><div class="sub-card-body"><ul>
 <li>Fiktive Actionfiguren aus der Vor-Invasions-Popkultur</li>
 <li>Ironischer Bezug: Alien-Figuren die vor der Invasion als Spielzeug verkauft wurden</li>
-<li>Kurioser Sammelgegenstand mit Schmunzel-Faktor</li>
 </ul></div></div>
 <div class="sub-card"><div class="sub-card-title">📷 Fotos & Dokumente</div><div class="sub-card-body"><ul>
 <li>Tagebücher, Familienfotos, Postkarten</li>
-<li>Primär <strong>Story-Elemente</strong> — geben Einblick in die Welt vor der Invasion</li>
-<li>Kein direkter Handelswert, aber wichtig für Lore-Sammler</li>
+<li>Primär <strong>Story-Elemente</strong> — kein Handelswert</li>
 </ul></div></div>
 <div class="sub-card"><div class="sub-card-title">💎 Luxusgüter & Kuriositäten</div><div class="sub-card-body"><ul>
 <li>🥃 Whiskey, Wein — Stimmungsboost, hoher Tauschwert</li>
-<li>⌚ Uhren — Statussymbol, kein praktischer Nutzen</li>
+<li>⌚ Uhren — Statussymbol</li>
 <li>👽 Alien-Artefakte — unbekannte Funktion, möglicherweise mit dem Mantel-Element verbunden</li>
 </ul></div></div>
 <div class="sub-card" style="border-color:rgba(200,68,26,0.3);"><div class="sub-card-title" style="color:#c8441a;">⭐ Condition-Rating (1–10)</div><div class="sub-card-body"><ul>
-<li>Bestimmt den <strong>Handelswert</strong> jedes Sammelstücks</li>
 <li>Niedriger Collector-Skill: nur grober Bereich sichtbar (z.B. „2–5")</li>
 <li>Hoher Collector-Skill: <strong>exakter Wert</strong> erkennbar</li>
 <li>Optische Schäden sichtbar: kaputte Ecken, ausgeblichene Farben, Risse</li>
-<li>Schäden beeinflussen den Wert direkt und sichtbar</li>
 </ul></div></div>
 </div>`},
   { id:'weltbedrohung', num:'17', icon:'🚨', title:'Weltbedrohung spürbar halten', img:'https://images.unsplash.com/photo-1580136579312-94651dfd596d?w=800&q=60',
-    content:`<p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:14px;">Eine der wichtigsten Design-Entscheidungen: Der Spieler darf nie vergessen dass da draußen ein gefährlicher Gegner ist — egal wie gemütlich die Basis gerade wirkt.</p>
+    content:`<p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:14px;">Der Spieler darf nie vergessen dass da draußen ein gefährlicher Gegner ist — egal wie gemütlich die Basis gerade wirkt.</p>
 <div class="sub-grid">
 <div class="sub-card"><div class="sub-card-title">🌫️ Passive Erinnerungen</div><div class="sub-card-body"><ul>
-<li>Alien-Drohnen fliegen gelegentlich über die Basis — am Himmel sichtbar</li>
-<li>Ferne Explosionen und Geräusche aus anderen Gebieten hörbar</li>
-<li>Der Plattenspieler wird manchmal durch <strong>Alien-Störsignale unterbrochen</strong></li>
-<li>NPCs kommentieren was draußen passiert — manchmal beunruhigend</li>
+<li>Alien-Drohnen fliegen gelegentlich über die Basis</li>
+<li>Ferne Explosionen und Geräusche hörbar</li>
+<li>Plattenspieler wird durch <strong>Alien-Störsignale unterbrochen</strong></li>
+<li>NPCs kommentieren was draußen passiert</li>
 </ul></div></div>
 <div class="sub-card"><div class="sub-card-title">⚡ Aktive Mechaniken</div><div class="sub-card-body"><ul>
-<li>Alien-Angriffe werden mit <strong>Spielerfortschritt stärker</strong> — keine Sicherheitszone</li>
-<li>Turm erkennt Angriffe <strong>2–3 Tage im Voraus</strong> — Zeit zur Vorbereitung</li>
-<li>Nicht besuchte Gebiete werden <strong>von Aliens zurückerobert</strong></li>
-<li>Ressourcen werden knapper je länger man nicht erkundet</li>
+<li>Alien-Angriffe werden mit Spielerfortschritt stärker</li>
+<li>Turm erkennt Angriffe <strong>2–3 Tage im Voraus</strong></li>
+<li>Nicht besuchte Gebiete werden <strong>zurückerobert</strong></li>
 </ul></div></div>
-<div class="sub-card"><div class="sub-card-title">📡 Informationen & Neuigkeiten</div><div class="sub-card-body"><ul>
-<li>Handy-WIKI aktualisiert sich mit Berichten über Alien-Aktivitäten</li>
-<li>Händler-NPCs bringen Neuigkeiten von draußen — manchmal gut, manchmal schlecht</li>
-<li>Man kann eine Stunde Trikots tauschen und Platten hören — aber man kann es sich nicht leisten das zu vergessen</li>
+<div class="sub-card"><div class="sub-card-title">📡 Informationen</div><div class="sub-card-body"><ul>
+<li>Handy-WIKI aktualisiert sich mit Alien-Aktivitäten</li>
+<li>Händler-NPCs bringen Neuigkeiten von draußen</li>
 </ul></div></div>
-<div class="sub-card" style="border-color:rgba(200,68,26,0.3);"><div class="sub-card-title" style="color:#c8441a;">⛏️ Die Abbauanlagen — das wahre Ziel</div><div class="sub-card-body"><ul>
+<div class="sub-card" style="border-color:rgba(200,68,26,0.5);"><div class="sub-card-title" style="color:#c8441a;">⛏️ Abbauanlagen — das wahre Ziel</div><div class="sub-card-body"><ul>
 <li>Aliens kamen wegen einem <strong>unbekannten Element tief im Erdmantel</strong></li>
-<li>Für Menschen völlig unentdeckt und undetektierbar</li>
-<li>Stationäre Abbauanlagen: riesige Bohroperationen die tief in den Boden reichen</li>
-<li>Sie zu zerstören ist das <strong>ultimative Ziel im Endgame</strong></li>
-<li>Was passiert wenn alle Anlagen zerstört sind? — Noch in Entwicklung</li>
+<li>Abbauanlagen verseuchen <strong>nahegelegene Wasserquellen</strong></li>
+<li>Je näher an einer Anlage, desto schmutziger das lokale Wasser</li>
+<li>Das Ziel: nicht nur Aliens verjagen — sondern <strong>die Erde selbst retten</strong></li>
+<li>Alle Anlagen zerstören = Endgame</li>
 </ul></div></div>
 </div>`}
 ];
@@ -947,7 +1011,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 async function loadAllCounts() {
   if (!window.db) return;
-  
   let total = 0;
   for (const sec of sections) {
     try {
@@ -961,7 +1024,6 @@ async function loadAllCounts() {
 
 async function loadComments(sectionId) {
   if (!window.db) return;
-  
   const listEl = document.getElementById('comments-' + sectionId);
   listEl.innerHTML = '<div class="no-comments" style="color:var(--muted)">Lädt...</div>';
   try {
@@ -975,34 +1037,29 @@ async function loadComments(sectionId) {
     });
     updateCount(sectionId, snap.size);
   } catch(e) {
-    listEl.innerHTML = '<div class="no-comments" style="color:var(--accent)">Firebase noch nicht konfiguriert.</div>';
+    listEl.innerHTML = '<div class="no-comments" style="color:var(--accent)">Fehler beim Laden.</div>';
   }
 }
 
 async function submitComment(sectionId) {
-  if (!currentUser) { openModal(); return; }
   if (!window.db) {
-    const msg = window.firebaseInitError
-      ? 'Firebase Fehler: ' + window.firebaseInitError
-      : 'Firebase lädt noch — bitte kurz warten und nochmal versuchen.';
-    alert(msg);
-    console.error('window.db ist leer. Fehler:', window.firebaseInitError);
+    alert('Firebase lädt noch — bitte kurz warten.');
     return;
   }
+  if (!currentUser) return;
   const input = document.getElementById('input-' + sectionId);
   const btn = document.getElementById('btn-' + sectionId);
   const text = input.value.trim();
   if (!text) return;
   btn.disabled = true; btn.textContent = '...';
   try {
-    
-    await window.db.collection('comments_' + sectionId).add({ author: currentUser, text: text, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+    await window.db.collection('comments_' + sectionId).add({
+      author: currentUser, text: text,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
     input.value = '';
     await loadComments(sectionId);
-  } catch(e) {
-    console.error('Firebase Fehler:', e);
-    alert('Fehler beim Speichern: ' + e.message);
-  }
+  } catch(e) { alert('Fehler: ' + e.message); }
   btn.disabled = false; btn.textContent = 'Senden';
 }
 
