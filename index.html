@@ -325,90 +325,144 @@ const sections = [
 </ul></div></div>
 </div>`},
   { id:'charakter', num:'04', icon:'⚔️', title:'Charakter & Stats', img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=60',
-    content:`<p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:14px;">Kein klassisches Level-Up-System. Alle Attribute verbessern sich durch tatsächliches Benutzen — wer viel kämpft wird stärker, wer viel kocht wird besser im Kochen.</p>
+    content:`<p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:14px;">Kein klassisches Level-Up über Menüs. Alle Skills steigen durch <strong>tatsächliches Benutzen</strong> — wie in Project Zomboid. Jeder Skill hat eine eigene XP-Leiste und eine sichtbare Level-Zahl (1, 2, 3...) damit man den Fortschritt spürt.</p>
 <div class="sub-grid">
-<div class="sub-card"><div class="sub-card-title">💪 Stärke</div><div class="sub-card-body"><ul>
-<li>Erhöht <strong>Nahkampfschaden</strong></li>
-<li>Erhöht maximale <strong>Tragkraft</strong> (mehr Gewicht = mehr Ausdauerverbrauch)</li>
-<li>Beeinflusst <strong>Einschüchterungswirkung</strong> auf NPCs und Gegner</li>
-<li>Steigt durch: Kämpfen, Fitnessgeräte in der Basis</li>
+<div class="sub-card"><div class="sub-card-title">⚙️ Wie das System funktioniert</div><div class="sub-card-body"><ul>
+<li>Jeder Skill hat eine <strong>eigene XP-Leiste</strong> und sichtbare Level-Zahl</li>
+<li>XP kommt nur durch <strong>tatsächliches Tun</strong> — Nahkampf-XP nur durch kämpfen, Koch-XP nur durch kochen</li>
+<li>Höheres Level = konkrete Boni (mehr Schaden, schnellere Produktion, bessere Heilung)</li>
+<li>Alle Skills von Anfang an sichtbar — man sieht immer wo man steht</li>
 </ul></div></div>
-<div class="sub-card"><div class="sub-card-title">🏃 Geschick</div><div class="sub-card-body"><ul>
-<li>Verbessert <strong>Beweglichkeit</strong> und Reflexe</li>
-<li>Erhöht <strong>Schussgenauigkeit</strong> im Fernkampf</li>
-<li>Verbessert <strong>Ausweichen</strong> von Angriffen</li>
-<li>Wichtig für Fernkämpfer und schnelle Spieler</li>
+<div class="sub-card"><div class="sub-card-title">📚 Lesen als XP-Quelle</div><div class="sub-card-body"><ul>
+<li>Bücher, Zeitschriften und Handbücher beim Looten findbar</li>
+<li>Lesen gibt XP für den jeweiligen Skill — aber nur bis zu einem <strong>Level-Cap</strong></li>
+<li>Dünnes Magazin → Cap bei Level 2–3</li>
+<li>Dickes Fachbuch → Cap bei Level 4–5</li>
+<li>Lesen gibt Grundwissen und Vorsprung — <strong>ersetzt Praxis nie komplett</strong></li>
 </ul></div></div>
-<div class="sub-card"><div class="sub-card-title">❤️ Konstitution</div><div class="sub-card-body"><ul>
-<li>Bestimmt maximale <strong>Lebenspunkte</strong></li>
-<li>Bestimmt <strong>Ausdauer</strong> (Laufen und Klettern kosten mehr als Gehen)</li>
-<li>Erhöht <strong>Resistenz</strong> gegen Krankheiten und Gifte</li>
-<li>Steigt durch: Cardio-Training, gesunde Ernährung</li>
-</ul></div></div>
-<div class="sub-card"><div class="sub-card-title">🧠 Intelligenz</div><div class="sub-card-body"><ul>
-<li>Beeinflusst Wissen, Logik und Analyse</li>
-<li>Wichtig für <strong>Alien-Technologie</strong> verstehen und nutzen</li>
-<li>Ermöglicht Erforschung neuer <strong>Crafting-Rezepte</strong></li>
-<li>Höhere Intelligenz = schnelleres Lernen neuer Fähigkeiten</li>
-</ul></div></div>
-<div class="sub-card"><div class="sub-card-title">🔮 Weisheit</div><div class="sub-card-body"><ul>
-<li>Bestimmt <strong>Willenskraft</strong> und Einblick</li>
-<li>Beeinflusst wie gut der Charakter mit <strong>Extremsituationen</strong> umgeht</li>
-<li>Erhöht die Lernrate aus Erfahrungen</li>
-<li>Beeinflusst Entscheidungsqualität in Gesprächen mit NPCs</li>
-</ul></div></div>
-<div class="sub-card"><div class="sub-card-title">🗣️ Charisma</div><div class="sub-card-body"><ul>
-<li>Steuert <strong>NPC-Reaktionen</strong> auf den Spieler</li>
-<li>Verbessert <strong>Handelsmöglichkeiten</strong> und Tauschkonditionen</li>
-<li>Entscheidend beim <strong>Rekrutieren</strong> von Überlebenden</li>
-<li>Kann Konflikte zwischen NPCs schlichten</li>
+<div class="sub-card"><div class="sub-card-title">💪 Körper-Attribute</div><div class="sub-card-body"><ul>
+<li><strong>Stärke</strong> — Nahkampfschaden, Tragkraft, Einschüchterung</li>
+<li><strong>Geschick</strong> — Beweglichkeit, Schussgenauigkeit, Ausweichen</li>
+<li><strong>Konstitution</strong> — Lebenspunkte, Ausdauer, Resistenz</li>
+<li><strong>Intelligenz</strong> — Alien-Technologie verstehen, Crafting-Rezepte erforschen</li>
+<li><strong>Weisheit</strong> — Willenskraft, Umgang mit Extremsituationen</li>
+<li><strong>Charisma</strong> — NPC-Reaktionen, Handel, Rekrutieren</li>
 </ul></div></div>
 </div>`},
   { id:'skills', num:'05', icon:'🧠', title:'Skills & Berufe', img:'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=60',
-    content:`<div class="sub-grid">
+    content:`<p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:14px;">~55 Skills in 8 Kategorien. Jeder steigt durch tatsächliches Benutzen. Wer alles maxen will hat Hunderte von Stunden zu tun.</p>
+<div class="sub-grid">
+
+<div class="sub-card"><div class="sub-card-title">🏃 Bewegung & Stealth</div><div class="sub-card-body"><ul>
+<li>🏃 <strong>Sprinten</strong> — Geschwindigkeit und Ausdauer beim Laufen</li>
+<li>🤫 <strong>Leises Gehen</strong> — weniger Geräusche beim Bewegen</li>
+<li>👤 <strong>Schleichen</strong> — im Verborgenen bleiben, Gegner umgehen</li>
+<li>🧗 <strong>Klettern</strong> — schneller und sicherer über Hindernisse</li>
+<li>🏊 <strong>Schwimmen</strong> — Gewässer überqueren ohne zu erschöpfen</li>
+<li>⚖️ <strong>Gleichgewicht</strong> — weniger Stolpern auf unebenem Gelände</li>
+</ul></div></div>
+
 <div class="sub-card"><div class="sub-card-title">⚔️ Nahkampf</div><div class="sub-card-body"><ul>
-<li>Verbessert <strong>Schaden, Genauigkeit und Haltbarkeit</strong> aller Nahkampfwaffen</li>
-<li>Gilt für Messer, Äxte, Keulen, Speere und Stangenwaffen</li>
-<li>Steigt automatisch durch regelmäßiges Kämpfen im Nahkampf</li>
+<li>🔪 <strong>Messer</strong></li>
+<li>🪓 <strong>Axt</strong></li>
+<li>🏏 <strong>Keule / Schlagwaffe</strong></li>
+<li>🪃 <strong>Speer / Stangenwaffe</strong></li>
+<li>👊 <strong>Unbewaffnet</strong></li>
+<li>🛡️ <strong>Schild</strong> — Parieren und Blocken</li>
 </ul></div></div>
+
 <div class="sub-card"><div class="sub-card-title">🎯 Fernkampf</div><div class="sub-card-body"><ul>
-<li>Verbessert <strong>Schaden, Genauigkeit</strong> und Nachladegeschwindigkeit</li>
-<li>Erhöht Haltbarkeit von Fernkampfwaffen (Bogen, Armbrust, Schusswaffen)</li>
-<li>Steigt durch regelmäßiges Schießen — auch auf Übungszielen in der Basis</li>
+<li>🏹 <strong>Bogen / Armbrust</strong></li>
+<li>🔫 <strong>Pistole</strong></li>
+<li>🎯 <strong>Gewehr</strong></li>
+<li>💥 <strong>Schrotflinte</strong></li>
+<li>🪨 <strong>Schleuder</strong> — Early Game, leise</li>
+<li>🤲 <strong>Werfen</strong> — Steine, Granaten, Molotov</li>
 </ul></div></div>
-<div class="sub-card"><div class="sub-card-title">🔧 Handwerk</div><div class="sub-card-body"><ul>
-<li>Hergestellte Gegenstände haben <strong>höhere Haltbarkeit</strong></li>
-<li>Produktion läuft <strong>schneller</strong> ab</li>
-<li>Werkzeuge in der Basis (Motorsäge, Nähmaschine) erhöhen Skill im Umkreis</li>
-<li>Auch nicht-spezialisierte Spieler profitieren von Werkzeug-Nähe</li>
+
+<div class="sub-card"><div class="sub-card-title">🛡️ Defensiv</div><div class="sub-card-body"><ul>
+<li>💨 <strong>Ausweichen</strong> — Angriffen ausweichen</li>
+<li>🔄 <strong>Kontern</strong> — nach Ausweichen sofort zurückschlagen</li>
+<li>🦺 <strong>Rüstungsnutzung</strong> — Schutzwert der Ausrüstung besser ausnutzen</li>
 </ul></div></div>
-<div class="sub-card"><div class="sub-card-title">🍳 Kochen</div><div class="sub-card-body"><ul>
-<li>Stärkere <strong>Buff-Effekte</strong> durch Mahlzeiten</li>
-<li>Buffs halten <strong>länger</strong> an mit höherem Kochskill</li>
-<li>Kochgeräte in der Basis (Herd, Kochtopf, Mikrowelle) erhöhen Skill im Bereich</li>
-<li>Koch-NPCs mit hohem Skill versorgen die ganze Basis effizienter</li>
+
+<div class="sub-card"><div class="sub-card-title">🔧 Handwerk & Crafting</div><div class="sub-card-body"><ul>
+<li>⚔️ <strong>Waffenbau</strong></li>
+<li>🪚 <strong>Werkzeugbau</strong></li>
+<li>🏠 <strong>Basenbau</strong></li>
+<li>🚁 <strong>Maschinenbau — Drohnen</strong></li>
+<li>🤖 <strong>Maschinenbau — Roboter</strong></li>
+<li>🧵 <strong>Schneider</strong></li>
+<li>🍳 <strong>Kochen</strong></li>
+<li>🥐 <strong>Backen</strong> — separat von Kochen</li>
+<li>🌱 <strong>Farming — Pflanzen</strong></li>
+<li>🐄 <strong>Farming — Tiere</strong></li>
+<li>🔩 <strong>Reparieren</strong> — Waffen und Ausrüstung</li>
+<li>⚡ <strong>Elektronik</strong> — Solaranlage, Geräte reparieren</li>
+<li>💣 <strong>Sprengstoff</strong> — Fallen und Sprengladungen</li>
 </ul></div></div>
-<div class="sub-card"><div class="sub-card-title">🧵 Schneidern</div><div class="sub-card-body"><ul>
-<li>Hergestellte Kleidung hat <strong>höhere Haltbarkeit und besseren Schutz</strong></li>
-<li>Mit höherem Skill: Kevlar-Rüstungen und Spezialausrüstung herstellbar</li>
-<li>Rucksäcke mit Holster, Messerhalter und Munitionshalter möglich</li>
+
+<div class="sub-card"><div class="sub-card-title">🧠 Wissen & Überleben</div><div class="sub-card-body"><ul>
+<li>🩹 <strong>First Aid</strong></li>
+<li>🏥 <strong>Chirurgie</strong> — komplexere Verletzungen behandeln</li>
+<li>💊 <strong>Selbstversorgung</strong> — sich selbst heilen ohne NPC</li>
+<li>🧭 <strong>Navigation</strong> — schnelleres Reisen, weniger Verbrauch</li>
+<li>⚠️ <strong>Fallen-Erkennung</strong></li>
+<li>🪤 <strong>Fallen bauen</strong></li>
+<li>🔓 <strong>Schlösser knacken</strong></li>
+<li>🐾 <strong>Tierkunde</strong> — Tiere zähmen, Verhalten vorhersagen</li>
+<li>🌿 <strong>Botanik</strong> — essbare Pflanzen erkennen, Gifte meiden</li>
+<li>🎣 <strong>Angeln</strong></li>
+<li>🦌 <strong>Jagen</strong> — Spuren lesen, Tiere aufspüren</li>
+<li>🔥 <strong>Feuermachen</strong> — ohne Feuerzeug</li>
+<li>🌦️ <strong>Wetterkunde</strong> — Regen und Sturm vorhersagen</li>
 </ul></div></div>
-<div class="sub-card"><div class="sub-card-title">🌾 Farming</div><div class="sub-card-body"><ul>
-<li>Höhere <strong>Ernteerträge</strong> bei Gemüse, Obst und Kräutern</li>
-<li>Tiere auf der Farm <strong>produzieren mehr</strong> und bleiben gesünder</li>
-<li>Essentiell für langfristige <strong>Selbstversorgung</strong> der Basis</li>
+
+<div class="sub-card"><div class="sub-card-title">👥 Soziales</div><div class="sub-card-body"><ul>
+<li>🤝 <strong>Verhandeln</strong> — bessere Tauschkonditionen</li>
+<li>👑 <strong>Anführen</strong> — NPCs im Kampf effektiver</li>
+<li>😤 <strong>Einschüchtern</strong> — Gegner und NPCs einschüchtern</li>
+<li>🗣️ <strong>Überzeugen</strong> — NPCs leichter rekrutieren</li>
+<li>🎭 <strong>Täuschen</strong> — als Kollaborateur ausgeben</li>
 </ul></div></div>
-<div class="sub-card"><div class="sub-card-title">🏃 Ausdauer</div><div class="sub-card-body"><ul>
-<li>Steigt durch regelmäßiges <strong>Laufen und Klettern</strong></li>
-<li>Cardio-Training mit Fitnessgeräten in der Basis beschleunigt Fortschritt</li>
-<li>Bestimmt wie lange man laufen, klettern und kämpfen kann ohne zu erschöpfen</li>
+
+<div class="sub-card"><div class="sub-card-title">🔍 Wahrnehmung</div><div class="sub-card-body"><ul>
+<li>👁️ <strong>Aufmerksamkeit</strong> — Gegner früher bemerken</li>
+<li>🕵️ <strong>Spurenlesen</strong> — Bewegungen von Gegnern und Tieren verfolgen</li>
+<li>⭐ <strong>Collector / Schätzen</strong> — Wert von Sammelstücken erkennen</li>
+<li>🔬 <strong>Mechanik erkennen</strong> — Alien-Technologie analysieren</li>
 </ul></div></div>
-<div class="sub-card" style="border-color:rgba(200,68,26,0.3);"><div class="sub-card-title" style="color:#c8441a;">⭐ Collector</div><div class="sub-card-body"><ul>
-<li>Niedrig: nur grober Rating-Bereich sichtbar (z.B. <strong>„2–5"</strong>)</li>
-<li>Hoch: <strong>exakter Wert</strong> eines Sammelstücks erkennbar</li>
-<li>Unverzichtbar für gutes Handeln mit seltenen Gegenständen</li>
-<li>Optische Schäden (kaputte Ecken, ausgeblichene Farben) beeinflussen Wert sichtbar</li>
+
+<div class="sub-card"><div class="sub-card-title">🚗 Fahrzeuge</div><div class="sub-card-body"><ul>
+<li>🚙 <strong>Fahren</strong> — weniger Unfälle, effizienter</li>
+<li>🔧 <strong>Fahrzeug-Reparatur</strong></li>
+<li>🐴 <strong>Reiten</strong> — Pferd effektiver nutzen</li>
 </ul></div></div>
+
+<div class="sub-card"><div class="sub-card-title">💪 Körper</div><div class="sub-card-body"><ul>
+<li>🏃 <strong>Ausdauer</strong> — wie lange man läuft, klettert, kämpft</li>
+<li>📦 <strong>Tragkraft</strong> — wie viel Gewicht man trägt</li>
+<li>😤 <strong>Schmerztoleranz</strong> — länger kämpfen trotz Verletzung</li>
+<li>❤️ <strong>Regeneration</strong> — natürliche Heilung</li>
+</ul></div></div>
+
+<div class="sub-card" style="grid-column:1/-1;"><div class="sub-card-title">📚 Lesen als XP-Quelle</div><div class="sub-card-body">
+<p style="font-size:12px;color:#999;margin-bottom:12px;">Bücher und Zeitschriften beim Looten findbar. Lesen gibt XP bis zu einem <strong>Level-Cap</strong> — ersetzt Praxis nie komplett.</p>
+<table style="width:100%;border-collapse:collapse;font-size:13px;">
+<tr style="border-bottom:1px solid rgba(255,107,43,0.4);"><th style="padding:7px 10px;text-align:left;color:#ff6b2b;">Buch / Magazin</th><th style="padding:7px 10px;text-align:left;color:#ff6b2b;">Skill</th><th style="padding:7px 10px;text-align:left;color:#ff6b2b;">Cap</th></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:7px 10px;">📰 Angelzeitschrift</td><td style="padding:7px 10px;">Angeln</td><td style="padding:7px 10px;color:#999;">Level 2–3</td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:7px 10px;">📗 Erste-Hilfe-Handbuch</td><td style="padding:7px 10px;">First Aid</td><td style="padding:7px 10px;color:#999;">Level 3</td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:7px 10px;">📘 Botanik-Ratgeber</td><td style="padding:7px 10px;">Botanik</td><td style="padding:7px 10px;color:#999;">Level 3</td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:7px 10px;">📙 Waffenpflege-Handbuch</td><td style="padding:7px 10px;">Reparieren</td><td style="padding:7px 10px;color:#999;">Level 2</td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:7px 10px;">📕 Landwirtschafts-Almanach</td><td style="padding:7px 10px;">Farming — Pflanzen</td><td style="padding:7px 10px;color:#999;">Level 3</td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:7px 10px;">📓 Tierarzt-Handbuch</td><td style="padding:7px 10px;">Tierkunde / Farming Tiere</td><td style="padding:7px 10px;color:#999;">Level 3</td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:7px 10px;">📔 Überlebenshandbuch</td><td style="padding:7px 10px;">Feuermachen, Navigation</td><td style="padding:7px 10px;color:#999;">Level 2</td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:7px 10px;">📒 Elektronik-Handbuch</td><td style="padding:7px 10px;">Elektronik</td><td style="padding:7px 10px;color:#999;">Level 3</td></tr>
+<tr><td style="padding:7px 10px;">🗞️ Militärhandbuch</td><td style="padding:7px 10px;">Schusswaffen-Skills</td><td style="padding:7px 10px;color:#999;">Level 4</td></tr>
+</table>
+<p style="font-size:12px;color:#666;margin-top:8px;font-style:italic;">Dünnes Magazin → Cap Level 2–3 · Dickes Fachbuch → Cap Level 4–5</p>
+</div></div>
+
 </div>`},
   { id:'gegner', num:'06', icon:'👾', title:'Gegner', img:'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=800&q=60',
     content:`<p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:14px;">Aliens operieren in organisierten Einheiten mit klar definierten Rollen. Je weiter von der Basis, desto stärker und besser ausgerüstet sind die Gegner.</p>
