@@ -304,25 +304,50 @@ const sections = [
 </ul></div></div>
 </div>`},
   { id:'welt', num:'03', icon:'🗺️', title:'Welt & Karte', img:'map.jpg',
-    content:`<div class="sub-grid">
-<div class="sub-card" style="grid-column:1/-1;"><div class="sub-card-title">🎯 Zonenmodell</div><div class="sub-card-body">
-<p style="font-size:12px;color:#999;margin-bottom:10px;">Rundes Modell — sicherer Kern in der Mitte, nach außen hin immer gefährlicher aber auch besseres Loot.</p>
-<img src="map.jpg" alt="Zonenmodell" style="width:100%;border-radius:4px;margin-top:8px;display:block;">
+    content:`<p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:14px;">Eine große zusammenhängende Open World — aufgeteilt in Zonen, jede Zone in prozedural generierte Teilbereiche. Keine zwei Spieler haben dieselbe Karte.</p>
+<div class="sub-grid">
+
+<div class="sub-card" style="grid-column:1/-1;"><div class="sub-card-title">🌍 Die Welt</div><div class="sub-card-body">
+<img src="welt.png" alt="Weltkarte" style="width:100%;border-radius:6px;display:block;">
+<p style="font-size:12px;color:#999;margin-top:10px;">Die fiktive Erde von Last Hope — eigene Kontinente, eigene Ländernamen. Schauplatz des globalen Widerstands gegen die Alien-Besatzung.</p>
 </div></div>
+
+<div class="sub-card" style="grid-column:1/-1;"><div class="sub-card-title">🎯 Zonenmodell</div><div class="sub-card-body">
+<img src="zonenkarte.jpg" alt="Zonenmodell" style="width:100%;border-radius:6px;display:block;">
+<p style="font-size:12px;color:#999;margin-top:10px;">Spielerbasis im Zentrum (Sektor Zero) — je weiter nach außen, desto gefährlicher aber auch besser der Loot. Zone 4 beherbergt immer die Alien-Abbauanlage.</p>
+</div></div>
+
+<div class="sub-card"><div class="sub-card-title">🗂️ Struktur der Welt</div><div class="sub-card-body"><ul>
+<li>Fixe <strong>Ringstruktur</strong> — Zone 1 (sicher) bis Zone 4 (gefährlich)</li>
+<li>Inhalt jeder Zone <strong>prozedural generiert</strong> — große Stadtteile, Wälder, Felder, Ruinen</li>
+<li>Natürliche Barrieren (Flüsse, Berge, Schluchten) machen den Ring <strong>unvollständig</strong></li>
+<li>Alien-Abbauanlage immer in Zone 4 — egal ob drumherum Stadt, Wald oder Feld</li>
+<li>Hoher Wiederspielwert — keine zwei Welten sind gleich</li>
+</ul></div></div>
+
+<div class="sub-card"><div class="sub-card-title">🚧 Zonen-Übergänge</div><div class="sub-card-body"><ul>
+<li>Kein Ladebildschirm — <strong>nahtloser Übergang</strong> durch die Umgebung</li>
+<li>Übergänge sind natürliche Engpässe: Tunnel, dichtes Waldstück, Schluchtpfad</li>
+<li>Diese Bereiche sind <strong>besonders bewacht</strong> — Aliens kontrollieren die Zugänge</li>
+<li>Scouts patrouillieren in Übergangszonen — nie entkommen lassen</li>
+<li>Ob Zonengrenzen auf der Karte sichtbar sind — noch in Diskussion</li>
+</ul></div></div>
+
 <div class="sub-card"><div class="sub-card-title">🚗 Reisen</div><div class="sub-card-body"><ul>
 <li>Jede Reise braucht <strong>Proviant</strong> — je weiter das Ziel, desto mehr</li>
 <li>Essen kann unterwegs verderben — richtiges Reiseproviant wählen</li>
 <li>⚡ <strong>Schnellreise:</strong> hohes Entdeckungsrisiko, Reise kann unterbrochen werden</li>
 <li>🐢 <strong>Langsame Reise:</strong> sicher, niedriges Risiko, mehr Zeit</li>
-<li>Manuelle Reise von Zone zu Zone ebenfalls möglich</li>
+<li>Manuelle Erkundung von Teilbereich zu Teilbereich ebenfalls möglich</li>
 </ul></div></div>
+
 <div class="sub-card"><div class="sub-card-title">🗺️ Gebiete & Kontrolle</div><div class="sub-card-body"><ul>
-<li>Gebiete in der Entfernung werden auf der Karte angezeigt</li>
 <li>Wer ein Gebiet <strong>nicht regelmäßig besucht</strong> → Aliens erobern es zurück</li>
-<li>Natürliche Barrieren schützen bestimmte Bereiche: Berge, Meer, Seen</li>
-<li>Startpunkt frei wählbar — beeinflusst den sicheren Bereich</li>
+<li>Natürliche Barrieren schützen bestimmte Bereiche dauerhaft</li>
 <li>Je mehr Gebiete kontrolliert werden, desto mehr Ressourcen fließen ein</li>
+<li>Events (Angriffe, Händler, Funde) werden pro Teilbereich gesteuert</li>
 </ul></div></div>
+
 </div>`},
   { id:'charakter', num:'04', icon:'⚔️', title:'Charakter & Fortschritt', img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=60',
     content:`<p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:14px;">Kein klassisches Level-Up über Menüs. Alle Skills steigen durch <strong>tatsächliches Benutzen</strong>. Jeder Skill hat eine eigene XP-Leiste und eine sichtbare Level-Zahl (1, 2, 3...) damit man den Fortschritt spürt.</p>
